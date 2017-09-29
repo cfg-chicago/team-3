@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        {% block head %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Journeys{% endblock %} | Embarc</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spectral">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500">
+        {% endblock %}
+    </head>
+    <body>
+        <main class="wrapper">
+            {% block body %}
+            {% endblock %}
+        </main>
+        {% block scripts %}
+        {% endblock %}
+    </body>
+</html>
