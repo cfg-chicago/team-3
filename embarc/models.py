@@ -25,6 +25,7 @@ class User(db.Model):
     last_name = db.Column(db.String(120), unique=False, nullable=False)
     email = db.Column(db.String(120), unique=False, nullable=False)
     group = db.Column(db.String(120), unique=False, nullable=False)
+    password = db.Column(db.String(120), unique=False, nullable=False)
     user_type = db.Column(db.String(10), unique=False, nullable=False)
 
     # fb_login = db.Column(db.String(120), unique=False, nullable=False)

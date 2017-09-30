@@ -98,24 +98,23 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
-        if password == 'student':
-            user_type = 'STUDENT'
-        elif password == 'admin':
-            user_type = 'ADMIN'
-        else:
+        user = User.query.filter_by(username=username).first()
+
+        if not user:
+            flash('User does not exist.', 'danger')
+            return render_template('login.html', form=form, user=current_user)
+            
+        if user.password != password:
             flash(
                 'Invalid username or password. Please try again.',
                 'danger')
             return render_template('login.html', form=form, user=current_user)
 
-        user = User.query.filter_by(username=username).first()
+        
+        session['username'] = username
 
-        if not user:
-            user = User(username, password, user_type)
-            session['username'] = username
-            db.session.add(user)
-            db.session.commit()
         login_user(user)
+
         flash('You have successfully logged in.', 'success')
         return redirect(url_for('index'))
 
