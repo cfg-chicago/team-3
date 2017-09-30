@@ -28,17 +28,17 @@ def index():
 
 
 @app.route('/journey/<journey_slug>/')
-def journey(journey_slug):
+def show_journey(journey_slug):
     context = {
-        "journey_name" : journey_slug
-        # TBD
+        "journey_name" : journey_slug,
+        "journey_description": Journey.query.filter_by(id=journey_slug).first()
     }
-    return "null"
+    return journey_description
    # return render_template('journey.html', **context)
 
 
 @app.route('/reflection/<reflection_slug>/')
-def reflection(reflection_slug):
+def show_reflection(reflection_slug):
     context = {
         "reflection_name" : reflection_slug
         # TBD
