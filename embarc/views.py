@@ -21,6 +21,8 @@ from werkzeug.utils import secure_filename
 
 from flask_login import current_user, login_user, logout_user, login_required
 
+user_type = None
+
 @app.route('/')
 def index():
     if 'username' not in session:
