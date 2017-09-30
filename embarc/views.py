@@ -27,6 +27,17 @@ def index():
     return render_template('index.html', journeys=journeys, user=current_user)
 
 
+@app.route('/admin_feedback/')
+def show_admin_feedback():
+    feedback = Feedback.query.all()
+    context = {
+        'feed_list' : []
+    }
+    for feed in feedback:
+        context['feed_list'][feed.journeyid].append(feed)
+    return render_template('admin_feedback.html', user=current_user, **context)
+
+
 @app.route('/journey/<journey_slug>/feedback/', methods=['GET', 'POST'])
 def show_feedback(journey_slug):
     context = {
