@@ -29,6 +29,7 @@ def index():
         journey = Journey(name=journey_name, description=journey_description, picture=journey_picture)
         db.session.add(journey)
         db.session.commit()
+
     print(Journey.query.all())
     return render_template('index.html')
 
@@ -37,3 +38,9 @@ def index():
 def add_journey():
     add_journey_form = AddJourneyForm()
     return render_template('add_journey.html', form=add_journey_form)
+
+
+@app.route('/add-reflection')
+def add_reflection():
+    add_reflection_form = AddReflectionForm()
+    return render_template('add_reflection.html', form=add_reflection_form)
