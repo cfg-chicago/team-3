@@ -32,7 +32,8 @@ def add_journey():
         journey_name = add_journey_form.name.data
         journey_description = add_journey_form.description.data
         #journey_picture = add_journey_form.picture.data
-        journey = Journey(name=journey_name, description=journey_description, picture=journey_picture)
+        print("Name: {}, Description: {}".format(journey_name, journey_description))
+        journey = Journey(name=journey_name, description=journey_description)#, picture=journey_picture)
         db.session.add(journey)
         db.session.commit()
         return redirect(url_for('index'))
