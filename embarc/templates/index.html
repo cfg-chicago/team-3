@@ -8,9 +8,11 @@
             <a class="button" href="{{url_for('login')}}">Login</a>
         </div>
     </section>
+    {% if user_type == 'ADMIN' %}
     <div class="container">
         <a class="button" href="{{url_for('add_journey')}}">Add a Journey</a>
     </div>
+    {% endif %}
     {% for journey in journeys %}
     <div class="container">
         <h2 class="subtitle">{{ journey.name }}</h2>
