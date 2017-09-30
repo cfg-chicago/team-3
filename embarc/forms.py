@@ -25,4 +25,4 @@ class CreateUserForm(Form):
 	email = StringField('Email', [DataRequired()])
 	group = StringField('Group', [DataRequired()])
 	password = PasswordField('Password', [DataRequired()])
-	teacher_access_code = PasswordField('Teacher access code', [DataRequired()])
+	teacher_access_code = PasswordField('Teacher access code')
