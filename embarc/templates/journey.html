@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
     <div class="container">
-        <h2>{{ journey_name }}</h2>
+        <h1>{{ journey_name }}</h1>
   </div>
         <div class="container container-full-width" style="background-image:url({{ url_for('static', filename='cdn/{}'.format(journey_img_name)) }})"></div>
   <div class="container">
@@ -10,9 +10,9 @@
       </h4>
   </div>
   {% for reflection in reflections %}
-  <div class="container">
+  <div class="container" style="background-color: white">
       <h2>{{reflection.name}} says:</h2>
-      <h4>{{reflection.description}}</h4>
+      <blockquote>{{reflection.description}}</blockquote>
   </div>
   <div>
     {{reflection.date}}
