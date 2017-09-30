@@ -32,6 +32,7 @@ def index():
 @app.route('/profile/', methods=['GET', 'POST'])
 def show_user():
     context = {
+        "user" : get_current_user.username,
         "reflections" : Reflection.query.filter_by(name=current_user.username)
     }
     return render_template('user.html', **context)
