@@ -30,7 +30,8 @@ def index():
 @app.route('/user/<user_id>/', methods=['GET', 'POST'])
 def show_user(user_id):
     context = {
-        "user" :
+        "user" : session['username'],
+        "reflections" : Reflection.query.filter_by(name=session['username'])
     }
     return render_template('user.html', **context)
 
