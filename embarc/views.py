@@ -136,6 +136,7 @@ def create_user():
 
     if request.method == 'POST' and form.validate():
         username = request.form.get('username')
+        session['username'] = username
         first_name = request.form.get('first_name')
         last_name = request.form.get('last_name')
         email = request.form.get('email')
@@ -147,7 +148,7 @@ def create_user():
 
         # if user doesn't already exist
         if not user:
-            if teacher_access_code == app.config['TEACHER_ACCESS_CODE']:
+            if teacher_access_code == 'teacher':
                 user_type = 'ADMIN'
             else:
                 user_type = 'STUDENT'
