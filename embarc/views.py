@@ -160,7 +160,7 @@ def login():
             return render_template('login.html', form=form, user=current_user)
         session['username'] = username
         login_user(user)
-        flash('You have successfully logged in.', 'success')
+        #flash('You have successfully logged in.', 'success')
         return redirect(url_for('index'))
     return render_template('login.html', form=form, user=current_user)
 
@@ -169,7 +169,7 @@ def login():
 def logout():
     logout_user()
     session.clear()
-    flash('You have successfully logged out.', 'success')
+    #flash('You have successfully logged out.', 'success')
     return redirect(url_for('index'))
 
 
@@ -199,7 +199,7 @@ def create_user():
             db.session.add(user)
             db.session.commit()
             login_user(user)
-            flash('You have successfully registered.', 'success')
+            #flash('You have successfully registered.', 'success')
             return redirect(url_for('index'))
         else:
             flash('Username already exists.', 'danger')
