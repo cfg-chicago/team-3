@@ -4,6 +4,8 @@ from embarc.models import db
 
 import os
 
-os.remove('./embarc/test.db')
+myfile = './embarc/test.db'
+if os.path.isfile(myfile):
+    os.remove()
 
 db.create_all()
