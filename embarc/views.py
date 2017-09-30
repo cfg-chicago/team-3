@@ -63,7 +63,7 @@ def show_feedback(journey_slug):
         q5 = add_feedback_form.q5.data
         q6 = add_feedback_form.q6.data
 
-        feedback = Feedback(name=session['username'], journeyid=journey_slug, rating=rating, q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6)
+        feedback = Feedback(name=session['username'], journeyname=context['journeyname'], journeyid=journey_slug, rating=rating, q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6)
         db.session.add(feedback)
         db.session.commit()
     return render_template('feedback.html', form=add_feedback_form, user=current_user, **context)
