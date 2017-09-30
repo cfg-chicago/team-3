@@ -8,13 +8,13 @@
                 <div class="field">
                     <label class="label">Name</label>
                     <div class="control">
-                        {{ form.name }}
+                        {{ form.name(class_='input') }}
                     </div>
                 </div>
                 <div class="field">
                     <label class="label">Description</label>
                     <div class="control">
-                        {{ form.description }}
+                        {{ form.description(class_='input') }}
                     </div>
                 </div>
                 {{ form.csrf_token }}
