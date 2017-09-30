@@ -16,9 +16,6 @@
           <h6>{{ reflection.date.strftime('%-m/%d/%Y %-I:%M %p')}}</h6>
           {% if reflection.picture %}
               <img src="{{ url_for('static', filename='cdn/{}'.format(reflection.picture)) }}">
-
-              <!--<div class="container container-full-width container-600-height" style="background-image:url({{ url_for('static', filename='cdn/{}'.format(reflection.picture)) }})"></div>-->
-
           {% endif %}
   </div>
   {% endfor %}
