@@ -14,12 +14,19 @@
       <button>{{reflection.name}}</button>
               <h4>{{reflection.description}}</h4>
           <h6>{{ reflection.date.strftime('%-m/%d/%Y %-I:%M %p')}}</h6>
+          {% if reflection.picture %}
+          <p>{{reflection.picture}}</p>
+          <img src="{{ url_for('static', filename='cdn/{}'.format(reflection.picture)) }})">
+
+            <div class="container container-full-width container-600-height" style="background-image:url({{ url_for('static', filename='cdn/{}'.format(reflection.picture)) }})"></div>
+
+          {% endif %}
   </div>
   {% endfor %}
   {% if user.user_type == 'ADMIN' or user.user_type == 'STUDENT' %}
     <div class="container">
         <h2>Add a reflection</h2>
-        <form action="#" method="post">
+        <form action="#" method="POST" enctype="multipart/form-data">
             {{ form.csrf_token }}
             {{ form.description.label }} {{ form.description(class_='textarea') }}
             {{ form.picture.label }} {{ form.picture }}
