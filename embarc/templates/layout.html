@@ -18,13 +18,14 @@
                     <a href="{{ url_for('index') }}">
                         <img src="{{ url_for('static', filename='embarc-logo.png') }}">
                     </a>
-                    <a class="button float-right" 
+                    <ul class="float-right">
                         {% if user.is_authenticated %}
-                            href="{{url_for('logout')}}">Logout
+                            <a href="{{url_for('show_user')}}">Profile</a>
+                            <a class="button" href="{{url_for('logout')}}">Logout</a>
                         {% else %}
-                            href="{{url_for('login')}}">Login
+                            <a class="button" href="{{url_for('login')}}">Login</a>
                         {% endif %}
-                    </a>
+                    </ul>
                 </div>
             </nav>
             {% block body %}
