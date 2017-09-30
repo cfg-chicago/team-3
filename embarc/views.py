@@ -53,11 +53,11 @@ def add_journey():
     if add_journey_form.validate_on_submit():
         journey_name = add_journey_form.name.data
         journey_description = add_journey_form.description.data
-        #journey_picture = add_journey_form.picture.data
-        #filename = secure_filename(journey_picture.filename)
-        #f.save(os.path.join(app.instance_path, 'static/cdn/{}'.format(filename)))
-        journey = Journey(name=journey_name, description=journey_description)#, picture=filename)
-        print("Name: {}, Description: {}".format(journey_name, journey_description))
+        journey_picture = add_journey_form.picture.data
+        journey_picture_filename = secure_filename(journey_picture.filename)
+        journey_picture.save(os.path.join(app.root_path, 'static/cdn/{}'.format(journey_picture_filename)))
+        journey = Journey(name=journey_name, description=journey_description, picture=journey_picture_filename)
+        print("Name: {}, Description: {}, Filename: {}".format(journey_name, journey_description, journey_picture_filename))
 
         db.session.add(journey)
         db.session.commit()
