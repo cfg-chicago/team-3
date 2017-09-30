@@ -25,11 +25,10 @@ def index():
     if request.method == 'POST':
         journey_name = request.form['name']
         journey_description = request.form['description']
-        journey_picture = request.form['picture']
-        journey = Journey(name=journey_name, description=journey_description, picture=journey_picture)
+        journey_picture = request.files['img_upload']
+        journey = Journey(name=journey_name, description=journey_description, picture=journey_picture.filename)
         db.session.add(journey)
         db.session.commit()
-    print(Journey.query.all())
     return render_template('index.html')
 
 
