@@ -20,7 +20,9 @@
                 </div>
             </div>
         </div>
+        <a href="{{ url_for('show_journey', journey_slug=journey.id) }}">
         <img src="{{ url_for('static', filename='cdn/{}'.format(journey.picture)) }}">
+        </a>
         {% endfor %}
 
 
