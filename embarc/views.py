@@ -31,22 +31,18 @@ def index():
 def add_journey():
     add_journey_form = AddJourneyForm()
     if add_journey_form.validate_on_submit():
+        return redirect(url_for('index'))
         journey_name = add_journey_form.name.data
         journey_description = add_journey_form.description.data
-        journey_picture = add_journey_form.picture.data
-        filename = secure_filename(journey_picture.filename)
-        f.save(os.path.join(
-            url_for('static', filename='cdn/{}'.format(filename))
-        ))
-        journey = Journey(name=journey_name, description=journey_description, picture=filename)
-        # #journey_picture = add_journey_form.picture.data
-        # print("Name: {}, Description: {}".format(journey_name, journey_description))
-        # journey = Journey(name=journey_name, description=journey_description)#, picture=journey_picture)
+        #journey_picture = add_journey_form.picture.data
+        #filename = secure_filename(journey_picture.filename)
+        #f.save(os.path.join(app.instance_path, 'static/cdn/{}'.format(filename)))
+        journey = Journey(name=journey_name, description=journey_description)#, picture=filename)
+        print("Name: {}, Description: {}".format(journey_name, journey_description))
 
         db.session.add(journey)
         db.session.commit()
         journeys = Journey.query.all()
-        print(journeys[0])
         return redirect(url_for('index'))
     return render_template('add_journey.html', form=add_journey_form)
 
