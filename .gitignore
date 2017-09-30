@@ -101,3 +101,4 @@ ENV/
 .vagrant/
 Vagrantfile
 *.db
+*.png

@@ -29,9 +29,6 @@ def index():
     return render_template('index.html', journeys=journeys, user=current_user)
 
 
-@app.route('/create/')
-
-
 @app.route('/profile/', methods=['GET', 'POST'])
 def show_user():
     context = {
