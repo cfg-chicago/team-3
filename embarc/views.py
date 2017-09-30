@@ -24,17 +24,16 @@ from flask_login import current_user, login_user, logout_user, login_required
 @app.route('/')
 def index():
     journeys = Journey.query.all()
-    print(journeys)
-    print(current_user)
     return render_template('index.html', journeys=journeys, user=current_user)
 
 
 @app.route('/profile/', methods=['GET', 'POST'])
 def show_user():
     context = {
+        "user" : get_current_user.username,
         "reflections" : Reflection.query.filter_by(name=current_user.username)
     }
-    return render_template('user.html', **context, user=current_user)
+    return render_template('user.html', **context)
 
 
 @app.route('/journey/<journey_slug>/', methods=['GET', 'POST'])
@@ -67,8 +66,6 @@ def add_journey():
         journey_picture_filename = secure_filename(journey_picture.filename)
         journey_picture.save(os.path.join(app.root_path, 'static/cdn/{}'.format(journey_picture_filename)))
         journey = Journey(name=journey_name, description=journey_description, picture=journey_picture_filename)
-        print("Name: {}, Description: {}, Filename: {}".format(journey_name, journey_description, journey_picture_filename))
-
         db.session.add(journey)
         db.session.commit()
         journeys = Journey.query.all()
@@ -102,14 +99,14 @@ def login():
         if not user:
             flash('User does not exist.', 'danger')
             return render_template('login.html', form=form, user=current_user)
-            
+
         if user.password != password:
             flash(
                 'Invalid username or password. Please try again.',
                 'danger')
             return render_template('login.html', form=form, user=current_user)
 
-        
+
         session['username'] = username
 
         login_user(user)
