@@ -122,9 +122,11 @@ def add_journey():
 def load_user(id):
     return User.query.get(int(id))
 
+
 @app.before_request
 def get_current_user():
     g.user = current_user
+
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
