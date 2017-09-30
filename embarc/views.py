@@ -30,9 +30,11 @@ def index():
 
 @app.route('/journey/<journey_slug>/')
 def show_journey(journey_slug):
+
     context = {
-        "journey_name" : journey_slug,
-        "journey_description": Journey.query.filter_by(id=journey_slug).first(),
+        "journey_name" : Journey.query.filter_by(id=journey_slug).first().name,
+        "journey_description": Journey.query.filter_by(id=journey_slug).first().description,
+        "journey_img_name" : Journey.query.filter_by(id=journey_slug).first().picture,
         "reflections" : []
     }
     return render_template('journey.html', **context)

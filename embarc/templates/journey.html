@@ -1,8 +1,11 @@
 {% extends "layout.html" %}
 {% block body %}
-{% for journey in journeys %}
-<div>
-  
-</div>
-{% endfor %}
+  {{ journey_name }}
+  <img src="{{ url_for('static', filename='cdn/{}'.format(journey_img_name)) }}">
+  {{ journey_description }}
+  {% for reflection in reflections %}
+  <div>
+    
+  </div>
+  {% endfor %}
 {% endblock %}
