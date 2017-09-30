@@ -15,10 +15,12 @@ from .app import app, redis
 from .events import socketio
 from .forms import MusicSubmitForm
 
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, session, request
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    print('sup')
+    if request.method == 'POST':
+        journey_name = request.form['journey_name']
+        print(journey_name)
     return render_template('index.html')
