@@ -35,5 +35,11 @@
             </div>
         </form>
     </div>
+
+    <div class="container">
+          <a href="{{ url_for('show_feedback', journey_slug=journey_id) }}" class="button">
+              Private Feedback
+          </a>
+    </div>
     {% endif %}
 {% endblock %}

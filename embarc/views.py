@@ -27,6 +27,14 @@ def index():
     return render_template('index.html', journeys=journeys, user=current_user)
 
 
+@app.route('/journey/<journey_slug>/feedback/', methods=['GET', 'POST'])
+def show_feedback(journey_slug):
+    context = {
+        "journeyid" : journey_slug
+    }
+    return render_template('feedback.html', form=add_reflection_form, user=current_user, **context)
+
+
 @app.route('/profile/', methods=['GET', 'POST'])
 def show_user():
     context = {
@@ -39,6 +47,7 @@ def show_user():
 @app.route('/journey/<journey_slug>/', methods=['GET', 'POST'])
 def show_journey(journey_slug):
     context = {
+        "journey_id": journey_slug,
         "journey_name" : Journey.query.filter_by(id=journey_slug).first().name,
         "journey_description": Journey.query.filter_by(id=journey_slug).first().description,
         "journey_img_name" : Journey.query.filter_by(id=journey_slug).first().picture,
