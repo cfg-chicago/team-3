@@ -30,7 +30,7 @@ def index():
 @app.route('/profile/', methods=['GET', 'POST'])
 def show_user():
     context = {
-        "user" : session['username'],
+        "user" : session['username'],b
         "reflections" : Reflection.query.filter_by(name=current_user.username)
     }
     return render_template('user.html', **context)
@@ -157,4 +157,4 @@ def create_user():
         flash('You have successfully registered.', 'success')
         return redirect(url_for('index'))
 
-    return render_template('create_user.html', form=form)
+    return render_template('create_user.html', form=form, user=current_user)
