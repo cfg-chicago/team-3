@@ -33,8 +33,8 @@ def index():
 @app.route('/create/')
 
 
-@app.route('/user/<user_id>/', methods=['GET', 'POST'])
-def show_user(user_id):
+@app.route('/profile/', methods=['GET', 'POST'])
+def show_user():
     context = {
         "user" : session['username'],
         "reflections" : Reflection.query.filter_by(name=session['username'])
@@ -78,7 +78,6 @@ def add_journey():
         db.session.commit()
         journeys = Journey.query.all()
         return redirect(url_for('index'))
-
 
     return render_template('add_journey.html', form=add_journey_form)
 
@@ -128,6 +127,7 @@ def login():
         flash(form.errors, 'danger')
 
     return render_template('login.html', form=form)
+
 
 @app.route('/logout/')
 def logout():
