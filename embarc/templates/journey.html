@@ -13,6 +13,7 @@
   <div class="container container-full-width container-comment" style="background-color: white; vertical-align: middle">
       <button>{{reflection.name}}</button>
               <h4>{{reflection.description}}</h4>
+          <h6>{{ reflection.date.strftime('%-m/%d/%Y %-I:%M %p')}}</h6>
   </div>
   {% endfor %}
   {% if user.user_type == 'ADMIN' or user.user_type == 'STUDENT' %}
