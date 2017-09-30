@@ -21,15 +21,13 @@ from werkzeug.utils import secure_filename
 
 from flask_login import current_user, login_user, logout_user, login_required
 
-user_type = None
-
 @app.route('/')
 def index():
     if 'username' not in session:
         return redirect(url_for('login'))
     journeys = Journey.query.all()
     print(journeys)
-    return render_template('index.html', journeys=journeys) #, user_type=current_user.user_type)
+    return render_template('index.html', journeys=journeys, user=current_user)
 
 
 @app.route('/')
@@ -59,7 +57,7 @@ def show_journey(journey_slug):
         reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug)
         db.session.add(reflection)
         db.session.commit()
-        return redirect(url_for('show_journey', journey_slug=journey_slug))# , user_type=current_user.user_type))
+        return redirect(url_for('show_journey', journey_slug=journey_slug, user=current_user))
     return render_template('journey.html', form=add_reflection_form, **context)
 
 

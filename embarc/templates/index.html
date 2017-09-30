@@ -8,12 +8,12 @@
             <a class="button" href="{{url_for('login')}}">Login</a>
         </div>
     </section>
-    {% if user_type == 'ADMIN' %}
+    {% if user.user_type == 'ADMIN' %}
     <div class="container">
         <a class="button" href="{{url_for('add_journey')}}">Add a Journey</a>
     </div>
     {% endif %}
-    {% if user_type == 'STUDENT' %}
+    {% if user.user_type == 'STUDENT' %}
     <p>Student</p>
     {% endif %}
     {% for journey in journeys %}
