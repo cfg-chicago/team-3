@@ -13,7 +13,7 @@ class Journey(db.Model):
 class Reflection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
-    content = db.Column(db.String(3000), unique=False, nullable=False)
+    description = db.Column(db.String(3000), unique=False, nullable=False)
     journey = db.Column(db.String(200), unique=False, nullable=False)
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
