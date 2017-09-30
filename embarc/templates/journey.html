@@ -13,9 +13,7 @@
   <div class="container">
       <h2>{{reflection.name}} says:</h2>
       <h4>{{reflection.description}}</h4>
-  </div>
-  <div>
-    {{ reflection.date.strftime('%-m/%d/%Y %-I:%M %p')}}
+      <h6>{{ reflection.date.strftime('%-m/%d/%Y %-I:%M %p')}}</h6>
   </div>
   {% endfor %}
   {% if user.user_type == 'ADMIN' or user.user_type == 'STUDENT' %}
