@@ -22,13 +22,13 @@ from flask import render_template, redirect, url_for, session, request
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
-    # if request.method == 'POST':
-    journey_name = 'name'# request.form['journey_name']
-    journey_description = 'this is a description' # request.form['description']
-    journey_picture = 'chuck'
-    journey = Journey(name=journey_name, description=journey_description, picture=journey_picture)
-    db.session.add(journey)
-    db.session.commit()
+    if request.method == 'POST':
+        journey_name = request.form['name']
+        journey_description = request.form['description']
+        journey_picture = request.form['picture']
+        journey = Journey(name=journey_name, description=journey_description, picture=journey_picture)
+        db.session.add(journey)
+        db.session.commit()
     print(Journey.query.all())
     return render_template('index.html')
 
