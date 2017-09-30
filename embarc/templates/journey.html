@@ -5,7 +5,9 @@
   {{ journey_description }}
   {% for reflection in reflections %}
   <div>
-    
+    {{reflection.name}}
+    {{reflection.description}}
+    {{reflection.date}}
   </div>
   {% endfor %}
 {% endblock %}
