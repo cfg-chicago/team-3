@@ -8,7 +8,7 @@
         <a class="button" href="{{url_for('add_journey')}}">Add a Journey</a>
     </div>
     {% endif %}
-    {% for journey in journeys %}
+    {% for journey in journeys | reverse %}
     <a href="{{ url_for('show_journey', journey_slug=journey.id) }}">
         <div class="container container-full-width container-600-height" style="background-image:url({{ url_for('static', filename='cdn/{}'.format(journey.picture)) }})">
             <button>{{ journey.name }}</button>
