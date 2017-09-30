@@ -14,7 +14,7 @@ from oauth2client.file import Storage
 from .app import app, redis
 from .models import db, Journey
 from .events import socketio
-from .forms import AddJourneyForm
+from .forms import AddJourneyForm, AddReflectionForm
 
 from flask import render_template, redirect, url_for, session, request
 
