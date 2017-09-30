@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="container">
+    <form
+        method="POST"
+        action="{{ url_for('show_feedback' , journey_slug=journeyid)}}"
+        role="form">
+      {{ form.csrf_token }}
+      <fieldset>
+          <label>{{ form.rating.label }}</label>{{ form.rating() }}
+          <label>{{ form.q1.label }}</label>{{ form.q1() }}
+          <label>{{ form.q2.label }}</label>{{ form.q2() }}
+          <label>{{ form.q3.label }}</label>{{ form.q3() }}
+          <label>{{ form.q4.label }}</label>{{ form.q4() }}
+          <label>{{ form.q5.label }}</label>{{ form.q5() }}
+          <label>{{ form.q6.label }}</label>{{ form.q6() }}
+          <label>{{ form.q7.label }}</label>{{ form.q7() }}
+          <button type="submit" class="btn btn-default">Submit</button>
+      </fieldset>
+    </form>
+  </div>
+{% endblock %}

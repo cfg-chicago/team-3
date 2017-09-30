@@ -14,7 +14,7 @@ from oauth2client.file import Storage
 from .app import app, redis
 from .models import db, Journey, Reflection, login_manager, User
 from .events import socketio
-from .forms import AddJourneyForm, AddReflectionForm, LoginForm, CreateUserForm
+from .forms import AddJourneyForm, AddReflectionForm, LoginForm, CreateUserForm, AddFeedbackForm
 
 from flask import render_template, redirect, url_for, session, request, g, flash
 from werkzeug.utils import secure_filename
@@ -43,7 +43,7 @@ def show_feedback(journey_slug):
         q6 = add_feedback_form.q6.data
         q7 = add_feedback_form.q7.data
         feedback = Feedback(name=session['username'], journey_id=journey_slug, rating=rating, q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6, q7=q7)
-    return render_template('feedback.html', form=add_reflection_form, user=current_user, **context)
+    return render_template('feedback.html', form=add_feedback_form, user=current_user, **context)
 
 
 @app.route('/profile/', methods=['GET', 'POST'])
@@ -104,6 +104,7 @@ def get_current_user():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
+    # returns the user home if user is already logged in
     if current_user.is_authenticated:
         flash('You are already logged in.')
         return redirect(url_for('index'))
@@ -114,29 +115,29 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
+        # searches the database for the username
         user = User.query.filter_by(username=username).first()
 
+        # if the username does not exist in the database, give warning
         if not user:
             flash('User does not exist.', 'danger')
             return render_template('login.html', form=form, user=current_user)
 
+        # if the input password does not match the one on record in db, deny access
         if user.password != password:
             flash(
                 'Invalid username or password. Please try again.',
                 'danger')
             return render_template('login.html', form=form, user=current_user)
 
-
+        
         session['username'] = username
 
         login_user(user)
 
         flash('You have successfully logged in.', 'success')
         return redirect(url_for('index'))
-
-    if form.errors:
-        flash(form.errors, 'danger')
-
+        
     return render_template('login.html', form=form, user=current_user)
 
 
@@ -163,7 +164,7 @@ def create_user():
 
         user = User.query.filter_by(username=username).first()
 
-        # if user doesn't already exist
+        # if user doesn't already exist, create new user and login
         if not user:
             if teacher_access_code == 'teacher':
                 user_type = 'ADMIN'
@@ -174,8 +175,10 @@ def create_user():
             session['username'] = username
             db.session.add(user)
             db.session.commit()
-        login_user(user)
-        flash('You have successfully registered.', 'success')
-        return redirect(url_for('index'))
+            login_user(user)
+            flash('You have successfully registered.', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Username already exists.', 'danger')
 
     return render_template('create_user.html', form=form, user=current_user)
