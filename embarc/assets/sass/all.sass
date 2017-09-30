@@ -5,6 +5,7 @@
 $color-bg: #f4f5f6
 $color-secondary: #000000
 $color-primary: #35d3b1
+$color-white: #ffffff
 
 @import "../../../node_modules/milligram/src/milligram.sass"
 
@@ -19,7 +20,7 @@ body
 
 h1, h2, h3
     margin-bottom: 2rem
-    margin-top: 2rem
+    margin-top: 5rem
     font-weight: 700
     letter-spacing: inherit
 
@@ -27,14 +28,24 @@ h1, h2, h3, h4
     letter-spacing: inherit
 
 .navbar
-    border-bottom: .1rem solid #d1d1d1
-    margin-top: 0.5rem
+    height: 40px
+    width: 100%
+    top: 0
+    left: 0
+    overflow: hidden
+    background: $color-white
+    position: fixed
+    z-index: 1
 
     ul
         list-style-type: none
 
     .container
         padding-bottom: 0.5rem
+
+    button
+        position: relative
+        top: -4px
 
 .float-right
     float: right
@@ -46,3 +57,9 @@ h1, h2, h3, h4
     padding-top: 2rem
     padding-left: 2rem
     background-size: cover
+
+    h2
+        display: inline-block
+        color: $color-white
+        background-color: $color-primary
+        padding: 1rem
