@@ -14,7 +14,7 @@ from oauth2client.file import Storage
 from .app import app, redis
 from .models import db, Journey, Reflection, login_manager, User
 from .events import socketio
-from .forms import AddJourneyForm, AddReflectionForm, LoginForm, CreateUserForm
+from .forms import AddJourneyForm, AddReflectionForm, LoginForm, CreateUserForm, AddFeedbackForm
 
 from flask import render_template, redirect, url_for, session, request, g, flash
 from werkzeug.utils import secure_filename
@@ -43,7 +43,7 @@ def show_feedback(journey_slug):
         q6 = add_feedback_form.q6.data
         q7 = add_feedback_form.q7.data
         feedback = Feedback(name=session['username'], journey_id=journey_slug, rating=rating, q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6, q7=q7)
-    return render_template('feedback.html', form=add_reflection_form, user=current_user, **context)
+    return render_template('feedback.html', form=add_feedback_form, user=current_user, **context)
 
 
 @app.route('/profile/', methods=['GET', 'POST'])

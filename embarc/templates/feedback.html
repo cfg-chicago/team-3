@@ -3,7 +3,7 @@
   <div class="container">
     <form
         method="POST"
-        action="{{ url_for('show_feedback') }}"
+        action="{{ url_for('show_feedback' , journey_slug=journeyid)}}"
         role="form">
       {{ form.csrf_token }}
       <fieldset>
