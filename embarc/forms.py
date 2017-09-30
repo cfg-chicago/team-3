@@ -8,7 +8,7 @@ from wtforms.validators import DataRequired
 class AddJourneyForm(Form):
     name = StringField('name', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])
-    #picture = FileField(validators=[FileRequired()])
+    picture = FileField(validators=[FileRequired()])
 
 
 class AddReflectionForm(Form):
