@@ -3,6 +3,10 @@
 {% block body %}
 {% for feed in list_by_journey_id %}
 <div>
+  <h1>Journey Name</h1>
+  {{feed.journeyname}}
+</div>
+<div>
   <h3>Journey ID</h3>
   {{feed.journeyid}}
 </div>
