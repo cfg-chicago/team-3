@@ -27,7 +27,7 @@ def index():
     return render_template('index.html', journeys=journeys)
 
 
-@app.route('/journey/<journey_slug>/')
+@app.route('/journey/<journey_slug>/', methods=['GET', 'POST'])
 def show_journey(journey_slug):
     context = {
         "journey_name" : Journey.query.filter_by(id=journey_slug).first().name,
@@ -35,7 +35,15 @@ def show_journey(journey_slug):
         "journey_img_name" : Journey.query.filter_by(id=journey_slug).first().picture,
         "reflections" : Reflection.query.filter_by(journeyid=journey_slug)
     }
-    return render_template('journey.html', **context)
+    add_reflection_form = AddReflectionForm()
+    if add_reflection_form.validate_on_submit():
+        reflection_name = add_reflection_form.name.data
+        reflection_description = add_reflection_form.description.data
+        reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug)
+        db.session.add(reflection)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('journey.html', form=add_reflection_form, **context)
 
 
 @app.route('/add-journey/', methods=['GET', 'POST'])
@@ -55,17 +63,3 @@ def add_journey():
         journeys = Journey.query.all()
         return redirect(url_for('index'))
     return render_template('add_journey.html', form=add_journey_form)
-
-
-@app.route('/add-reflection/', methods=['GET', 'POST'])
-def add_reflection():
-    add_reflection_form = AddReflectionForm()
-    if add_reflection_form.validate_on_submit():
-        reflection_name = add_reflection_form.name.data
-        reflection_description = add_reflection_form.description.data
-        reflection_journey = add_reflection_form.journey.data
-        reflection = Reflection(name=reflection_name, description=reflection_description, journey=reflection_journey)
-        db.session.add(reflection)
-        db.session.commit()
-        return redirect(url_for('index'))
-    return render_template('add_reflection.html', form=add_reflection_form)
