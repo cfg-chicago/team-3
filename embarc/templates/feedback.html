@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
   <div class="container">
+      <h1>Journey Feedback</h1>
     <form
         method="POST"
         action="{{ url_for('show_feedback' , journey_slug=journeyid)}}"
