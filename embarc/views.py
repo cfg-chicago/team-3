@@ -21,3 +21,7 @@ from flask import render_template, redirect, url_for
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/add-journey')
+def add_journey():
+    return render_template('add_journey.html')
