@@ -12,5 +12,5 @@ class AddReflectionForm(Form):
     description = StringField('description', validators=[DataRequired()])
 
 class LoginForm(Form):
-	username = TextField('Username', [DataRequired()])
+	username = StringField('Username', [DataRequired()])
 	password = PasswordField('Password', [DataRequired()])
