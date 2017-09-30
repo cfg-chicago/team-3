@@ -21,13 +21,13 @@ from werkzeug.utils import secure_filename
 
 from flask_login import current_user, login_user, logout_user, login_required
 
-
+# Main page, consists of all listed journeys
 @app.route('/')
 def index():
     journeys = Journey.query.all()
     return render_template('index.html', journeys=journeys, user=current_user)
 
-
+# Page shows all student feedback regarding journeys
 @app.route('/admin_feedback/')
 def show_admin_feedback():
     feedback = Feedback.query.all()
@@ -43,7 +43,7 @@ def show_admin_feedback():
         i += 1
     return render_template('admin_feedback.html', user=current_user, **context)
 
-
+# Feedback form to be filled for specific journey
 @app.route('/journey/<journey_slug>/feedback/', methods=['GET', 'POST'])
 def show_feedback(journey_slug):
     context = {
@@ -52,6 +52,8 @@ def show_feedback(journey_slug):
     }
     add_feedback_form = AddFeedbackForm()
     if add_feedback_form.validate_on_submit():
+        # Input feedback form parameters and add to the database
+
         rating = int(add_feedback_form.rating.data)
         q1 = add_feedback_form.q1.data
         q2 = add_feedback_form.q2.data
@@ -65,7 +67,7 @@ def show_feedback(journey_slug):
         return redirect(url_for('show_journey', journey_slug=journey_slug))
     return render_template('feedback.html', form=add_feedback_form, user=current_user, **context)
 
-
+# Profile page showing reflections posted by user
 @app.route('/profile/<user_slug>/', methods=['GET', 'POST'])
 def show_user(user_slug):
     context = {
@@ -74,7 +76,7 @@ def show_user(user_slug):
     full_user = User.query.filter_by(username=user_slug).first()
     return render_template('user.html', **context, user=current_user, target_user=full_user)
 
-
+# Journey page detailing journey information
 @app.route('/journey/<journey_slug>/', methods=['GET', 'POST'])
 def show_journey(journey_slug):
     context = {
@@ -102,10 +104,12 @@ def show_journey(journey_slug):
         return redirect(url_for('show_journey', journey_slug=journey_slug))
     return render_template('journey.html', form=add_reflection_form, user=current_user, **context)
 
-
+# Page that adds new journey to database, only available to admin
 @app.route('/add-journey/', methods=['GET', 'POST'])
 def add_journey():
     add_journey_form = AddJourneyForm()
+
+    # on form submit, process form parameters
     if add_journey_form.validate_on_submit():
         journey_name = add_journey_form.name.data
         journey_description = add_journey_form.description.data
@@ -128,7 +132,7 @@ def load_user(id):
 def get_current_user():
     g.user = current_user
 
-
+# Login page with warnings
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     # returns the user home if user is already logged in
@@ -201,3 +205,15 @@ def create_user():
             flash('Username already exists.', 'danger')
 
     return render_template('create_user.html', form=form, user=current_user)
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('error_500.html'), 500
+
+@app.errorhandler(403)
+def page_forbidden(e):
+    return render_template('error_403.html'), 403
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error_404.html'), 404
