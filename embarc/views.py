@@ -27,25 +27,27 @@ def index():
     return render_template('index.html', journeys=journeys)
 
 
-@app.route('/<journey_slug>')
-def show_journey():
+@app.route('/journey/<journey_slug>/')
+def journey(journey_slug):
     context = {
         "journey_name" : journey_slug
         # TBD
     }
-    return render_template('journey.html', **context)
+    return "null"
+   # return render_template('journey.html', **context)
 
 
-@app.route('/<reflection_slug>')
-def show_reflection():
+@app.route('/reflection/<reflection_slug>/')
+def reflection(reflection_slug):
     context = {
         "reflection_name" : reflection_slug
         # TBD
     }
-    return render_template('reflection.html', **context)
+    return "null"
+    # return render_template('reflection.html', **context)
 
 
-@app.route('/add-journey', methods=['GET', 'POST'])
+@app.route('/add-journey/', methods=['GET', 'POST'])
 def add_journey():
     add_journey_form = AddJourneyForm()
     if add_journey_form.validate_on_submit():
@@ -69,7 +71,7 @@ def add_journey():
     return render_template('add_journey.html', form=add_journey_form)
 
 
-@app.route('/add-reflection', methods=['GET', 'POST'])
+@app.route('/add-reflection/', methods=['GET', 'POST'])
 def add_reflection():
     add_reflection_form = AddReflectionForm()
     if add_reflection_form.validate_on_submit():
