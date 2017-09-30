@@ -52,7 +52,7 @@ def show_journey(journey_slug):
     }
     add_reflection_form = AddReflectionForm()
     if add_reflection_form.validate_on_submit():
-        reflection_name = add_reflection_form.name.data
+        reflection_name = session['username']
         reflection_description = add_reflection_form.description.data
         reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug)
         db.session.add(reflection)
