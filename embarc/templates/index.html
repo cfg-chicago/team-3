@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
     <div class="container">
-        <h1 class="title">Embarc Journeys</h1>
+        <h2 class="title">Embarc Journeys</h2>
     </div>
     {% if user.user_type == 'ADMIN' %}
     <div class="container">
@@ -9,11 +9,13 @@
     </div>
     {% endif %}
     {% for journey in journeys %}
-    <div class="container">
-        <h2 class="subtitle">{{ journey.name }}</h2>
-        <a href="{{ url_for('show_journey', journey_slug=journey.id) }}">
-            <img src="{{ url_for('static', filename='cdn/{}'.format(journey.picture)) }}">
-        </a>
-    </div>
+    <a href="{{ url_for('show_journey', journey_slug=journey.id) }}">
+        <div class="container container-full-width" style="background-image:url({{ url_for('static', filename='cdn/{}'.format(journey.picture)) }})">
+            <div class="container">
+                <h2 class="subtitle">{{ journey.name }}</h2>
+            </div>
+        </div>
+            <!--<img width="100%" src="{{ url_for('static', filename='cdn/{}'.format(journey.picture)) }}">-->
+    </a>
     {% endfor %}
 {% endblock %}
