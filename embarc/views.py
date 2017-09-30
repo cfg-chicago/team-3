@@ -34,7 +34,7 @@ def show_admin_feedback():
         'feed_list' : []
     }
     for feed in feedback:
-        context['feed_list'][feed.journeyid].append(feed)
+        context['feed_list'].append(feed)
     return render_template('admin_feedback.html', user=current_user, **context)
 
 
