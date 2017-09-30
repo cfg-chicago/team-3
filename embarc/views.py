@@ -19,21 +19,22 @@ from .forms import AddJourneyForm
 from flask import render_template, redirect, url_for, session, request
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
 
-    if request.method == 'POST':
-        journey_name = request.form['name']
-        journey_description = request.form['description']
-        journey_picture = request.form['picture']
-        journey = Journey(name=journey_name, description=journey_description, picture=journey_picture)
-        db.session.add(journey)
-        db.session.commit()
     print(Journey.query.all())
     return render_template('index.html')
 
 
-@app.route('/add-journey')
+@app.route('/add-journey', methods=['GET', 'POST'])
 def add_journey():
     add_journey_form = AddJourneyForm()
+    if add_journey_form.validate_on_submit():
+        journey_name = add_journey_form.name.data
+        journey_description = add_journey_form.description.data
+        #journey_picture = add_journey_form.picture.data
+        journey = Journey(name=journey_name, description=journey_description, picture=journey_picture)
+        db.session.add(journey)
+        db.session.commit()
+        return redirect(url_for('index'))
     return render_template('add_journey.html', form=add_journey_form)
