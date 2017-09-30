@@ -213,3 +213,15 @@ def create_user():
             flash('Username already exists.', 'danger')
 
     return render_template('create_user.html', form=form, user=current_user)
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('error_500.html'), 500
+
+@app.errorhandler(403)
+def page_forbidden(e):
+    return render_template('error_403.html'), 403
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error_404.html'), 404
