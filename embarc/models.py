@@ -18,6 +18,20 @@ class Reflection(db.Model):
     journeyname = db.Column(db.Integer, unique=False, nullable=False)
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
+class Feedback(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=False, nullable=False)
+    journeyid = db.Column(db.Integer, unique=False, nullable=False)
+    rating = db.Column(db.Integer, unique=False, nullable=False)
+    q1 = db.Column(db.String(3000), unique=False, nullable=False)
+    q2 = db.Column(db.String(3000), unique=False, nullable=False)
+    q3 = db.Column(db.String(3000), unique=False, nullable=False)
+    q4 = db.Column(db.String(3000), unique=False, nullable=False)
+    q5 = db.Column(db.String(3000), unique=False, nullable=False)
+    q6 = db.Column(db.String(3000), unique=False, nullable=False)
+    q7 = db.Column(db.String(3000), unique=False, nullable=False)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=False, nullable=False)
@@ -40,15 +54,15 @@ class User(db.Model):
         self.group = group
         self.password = password
         self.user_type = user_type
- 
+
     def is_authenticated(self):
         return True
- 
+
     def is_active(self):
         return True
- 
+
     def is_anonymous(self):
         return False
- 
+
     def get_id(self):
         return str(self.id)

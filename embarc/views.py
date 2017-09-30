@@ -27,6 +27,25 @@ def index():
     return render_template('index.html', journeys=journeys, user=current_user)
 
 
+@app.route('/journey/<journey_slug>/feedback/', methods=['GET', 'POST'])
+def show_feedback(journey_slug):
+    context = {
+        "journeyid" : journey_slug
+    }
+    add_feedback_form = AddFeedbackForm()
+    if add_feedback_form.validate_on_submit():
+        rating = add_feedback_form.rating.data
+        q1 = add_feedback_form.q1.data
+        q2 = add_feedback_form.q2.data
+        q3 = add_feedback_form.q3.data
+        q4 = add_feedback_form.q4.data
+        q5 = add_feedback_form.q5.data
+        q6 = add_feedback_form.q6.data
+        q7 = add_feedback_form.q7.data
+        feedback = Feedback(name=session['username'], journey_id=journey_slug, rating=rating, q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6, q7=q7)
+    return render_template('feedback.html', form=add_reflection_form, user=current_user, **context)
+
+
 @app.route('/profile/', methods=['GET', 'POST'])
 def show_user():
     context = {
@@ -39,6 +58,7 @@ def show_user():
 @app.route('/journey/<journey_slug>/', methods=['GET', 'POST'])
 def show_journey(journey_slug):
     context = {
+        "journey_id": journey_slug,
         "journey_name" : Journey.query.filter_by(id=journey_slug).first().name,
         "journey_description": Journey.query.filter_by(id=journey_slug).first().description,
         "journey_img_name" : Journey.query.filter_by(id=journey_slug).first().picture,
@@ -124,6 +144,7 @@ def login():
 def logout():
     logout_user()
     session.clear()
+    flash('You have successfully logged out.', 'success')
     return redirect(url_for('index'))
 
 @app.route('/create_user/', methods=['GET', 'POST'])
