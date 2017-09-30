@@ -25,3 +25,7 @@ def index():
         journey_description = request.form['description']
         journey = Journey(name=journey_name, description=)
     return render_template('index.html')
+
+@app.route('/add-journey')
+def add_journey():
+    return render_template('add_journey.html')
