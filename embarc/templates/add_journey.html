@@ -4,7 +4,7 @@
         <div class="container">
             <h1 class="title">Embarc Journeys</h1>
             <p>This is where you add journey</p>
-            <form action="#" method="post">
+            <!--<form action="/" method="post">
                <div class="field">
                   <label class="label">Picture</label>
                   <div class="control">
@@ -25,12 +25,14 @@
                         {{ form.description(class_='textarea') }}
                     </div>
                 </div>
-                <div class="field">
-                    {{ form.csrf_token }}
-                    <div class="control">
-                        <button class="button is-primary">Submit</button>
-                    </div>
-                </div>
+                {{ form.csrf_token }}
+                <input type=submit value=Submit>
+            </form> -->
+            <form action="{{ url_for('add_journey') }}" method="POST">
+                {{ form.csrf_token }}
+                {{ form.name(class_='input') }}
+                {{ form.description(class_='textarea') }}
+                <input type=submit value="Go">
             </form>
         </div>
     </section>
