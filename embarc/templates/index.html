@@ -16,7 +16,7 @@
             <img src="{{ url_for('static', filename='cdn/{}.jpg'.format(i)) }}">
             {% endfor %}
         <div class="container">
-            <a class="button" href="{{url_for('add_reflection')}}">Add a Reflection</a>
+            <input class="button" href="{{url_for('add_reflection')}}">Add a Reflection</a>
         </div>
     </section>
 {% endblock %}
