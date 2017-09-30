@@ -16,14 +16,14 @@ class AddReflectionForm(Form):
     picture = FileField('Picture')
 
 class AddFeedbackForm(Form):
-    rating = IntegerField('rating')#, validators=[DataRequired()])
-    q1 = StringField('q1')#, validators=[DataRequired()])
-    q2 = StringField('q2')#, validators=[DataRequired()])
-    q3 = StringField('q3')#, validators=[DataRequired()])
-    q4 = StringField('q4')#, validators=[DataRequired()])
-    q5 = StringField('q5')#, validators=[DataRequired()])
-    q6 = StringField('q6')#, validators=[DataRequired()])
-    q7 = StringField('q7')#, validators=[DataRequired()])
+    rating = IntegerField('rating')
+    q1 = StringField('q1')
+    q2 = StringField('q2')
+    q3 = StringField('q3')
+    q4 = StringField('q4')
+    q5 = StringField('q5')
+    q6 = StringField('q6')
+    q7 = StringField('q7')
 
 class LoginForm(Form):
 	username = StringField('Username', [DataRequired()])
