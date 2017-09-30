@@ -1,42 +1,17 @@
 {% extends 'layout.html' %}
 
 {% block body %}
+<div class="container">
 {% for feed in list_by_journey_id %}
-<div>
-  <h1>Journey Name</h1>
-  {{feed.journeyname}}
-</div>
-<div>
-  <h3>Journey ID</h3>
-  {{feed.journeyid}}
-</div>
-<div>
-  <h5>Rating</h5>
-  {{feed.rating}}
-</div>
-<div>
-  <h5>Question 1</h5>
-  {{feed.q1}}
-</div>
-<div>
-  <h5>Question 2</h5>
-  {{feed.q2}}
-</div>
-<div>
-  <h5>Question 3</h5>
-  {{feed.q3}}
-</div>
-<div>
-  <h5>Question 4</h5>
-  {{feed.q4}}
-</div>
-<div>
-  <h5>Question 5</h5>
-  {{feed.q5}}
-</div>
-<div>
-  <h5>Question 6</h5>
-  {{feed.q6}}
-</div>
+    <h1>{{feed.journeyname}}</h1>
+    <h3>Name: {{feed.name}}</h3>
+    <h4>Rating: {{feed.rating}}</h4>
+    <h4>Question 1: {{feed.q1}}</h4>
+    <h4>Question 2: {{feed.q2}}</h4>
+    <h4>Question 3: {{feed.q3}}</h4>
+    <h4>Question 4: {{feed.q4}}</h4>
+    <h4>Question 5: {{feed.q5}}</h4>
+    <h4>Question 6: {{feed.q6}}</h4>
 {% endfor %}
+</div>
 {% endblock %}

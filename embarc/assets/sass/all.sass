@@ -59,25 +59,17 @@ h1, h2, h3, h4
 .float-right
     float: right
 
-.container-600-height
-    height: 600px
-
 .container-full-width
     width: 100%
     margin-bottom: 2rem
-    padding-top: 2rem
+    padding-top: 50%
     padding-left: 2rem
     background-size: cover
 
-    h2
-        display: inline-block
-        color: $color-white
-        background-color: $color-primary
-        padding: 1rem
-        margin: 0
-
-    h4
-        display: inline-block
+    .button, button
+        position: static
+        top: -2rem
+        left: 2rem
 
 .container-comment
   padding-top: 0
@@ -90,6 +82,12 @@ h1, h2, h3, h4
 
   h4
         margin-bottom: 0
+
+.move-down
+    position: relative
+    top: 4rem
+    left: 2rem
+    z-index: 1
 
 input[type='email'], input[type='number'], input[type='password'], input[type='search'], input[type='tel'], input[type='text'], input[type='url'], textarea, select
     border-radius: 0
