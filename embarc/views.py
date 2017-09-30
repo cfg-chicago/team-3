@@ -14,7 +14,7 @@ from oauth2client.file import Storage
 from .app import app, redis
 from .models import db, Journey, Reflection, login_manager, User
 from .events import socketio
-from .forms import AddJourneyForm, AddReflectionForm, LoginForm
+from .forms import AddJourneyForm, AddReflectionForm, LoginForm, CreateUserForm
 
 from flask import render_template, redirect, url_for, session, request, g, flash
 from werkzeug.utils import secure_filename
@@ -133,3 +133,35 @@ def logout():
     logout_user()
     session.clear()
     return redirect(url_for('index'))
+
+@app.route('/create_user/', methods=['GET', 'POST'])
+def create_user():
+    form = CreateUserForm(request.form)
+
+    if request.method == 'POST' and form.validate():
+        username = request.form.get('username')
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        email = request.form.get('email')
+        group = request.form.get('group')
+        password = request.form.get('password')
+        teacher_access_code = request.form.get('teacher_access_code')
+
+        user = User.query.filter_by(username=username).first()
+
+        # if user doesn't already exist
+        if not user:
+            if teacher_access_code == app.config['TEACHER_ACCESS_CODE']:
+                user_type = 'ADMIN'
+            else:
+                user_type = 'STUDENT'
+            user = User(username, first_name, last_name, email,
+                group, password, user_type)
+            session['username'] = username
+            db.session.add(user)
+            db.session.commit()
+        login_user(user)
+        flash('You have successfully registered.', 'success')
+        return redirect(url_for('index'))
+
+    return render_template('create_user.html', form=form)
