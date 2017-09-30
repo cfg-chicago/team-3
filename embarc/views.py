@@ -22,5 +22,6 @@ from flask import render_template, redirect, url_for, session, request
 def index():
     if request.method == 'POST':
         journey_name = request.form['journey_name']
-        print(journey_name)
+        journey_description = request.form['description']
+        journey = Journey(name=journey_name, description=)
     return render_template('index.html')
