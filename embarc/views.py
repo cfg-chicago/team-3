@@ -22,10 +22,15 @@ from flask import render_template, redirect, url_for, session, request
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
-    if request.method == 'POST':
-        journey_name = 'name'# request.form['journey_name']
-        journey_description = 'this is a description' # request.form['description']
-        journey_picture = 'chuck'
-        journey = Journey(name=journey_name, description=journey_description, picture=journey_picture)
-        print(Journey.query.all())
+    # if request.method == 'POST':
+    journey_name = 'name'# request.form['journey_name']
+    journey_description = 'this is a description' # request.form['description']
+    journey_picture = 'chuck'
+    journey = Journey(name=journey_name, description=journey_description, picture=journey_picture)
+    # print(Journey.query.all())
     return render_template('index.html')
+
+
+@app.route('/add-journey')
+def add_journey():
+    return render_template('add_journey.html')
