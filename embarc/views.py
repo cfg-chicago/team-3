@@ -30,19 +30,28 @@ def index():
 @app.route('/admin_feedback/')
 def show_admin_feedback():
     feedback = Feedback.query.all()
-    context = {
-        'feed_list' : []
-    }
-    for feed in feedback:
-        context['feed_list'].append(feed)
+    max_journey = Journey.query.all()[-1].id
+    # context = {
+    #     'feed_list' : feedback
+    # }
+    context = {}
+    context['list_by_journey_id'] = []
+    i = 1
+    list = []
+    while i < max_journey + 1:
+        for feed in feedback:
+            if feed.journeyid == i:
+                context['list_by_journey_id'].append(feed)
+        i += 1
+
     return render_template('admin_feedback.html', user=current_user, **context)
 
 
 @app.route('/journey/<journey_slug>/feedback/', methods=['GET', 'POST'])
 def show_feedback(journey_slug):
     context = {
-        "journeyid" : journey_slug
-        # "journeyname": Journey.query.filter_by(id=journey_slug).first().name
+        "journeyid" : journey_slug,
+        "journeyname": Journey.query.filter_by(id=journey_slug).first().name
     }
     add_feedback_form = AddFeedbackForm()
     if add_feedback_form.validate_on_submit():
@@ -57,7 +66,6 @@ def show_feedback(journey_slug):
         feedback = Feedback(name=session['username'], journeyid=journey_slug, rating=rating, q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6)
         db.session.add(feedback)
         db.session.commit()
-        print(Feedback.query.all())
     return render_template('feedback.html', form=add_feedback_form, user=current_user, **context)
 
 
@@ -106,7 +114,7 @@ def add_journey():
         journey = Journey(name=journey_name, description=journey_description, picture=journey_picture_filename)
         db.session.add(journey)
         db.session.commit()
-        journeys = Journey.query.all()
+        # journeys = Journey.query.all()
         return redirect(url_for('index'))
 
     return render_template('add_journey.html', form=add_journey_form, user=current_user)
