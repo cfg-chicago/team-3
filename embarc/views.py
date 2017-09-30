@@ -12,13 +12,14 @@ from oauth2client import tools as tools
 from oauth2client.file import Storage
 
 from .app import app, redis
-from .models import db, Journey, Reflection, User
+from .models import db, Journey, Reflection, login_manager, User
 from .events import socketio
-from .forms import AddJourneyForm, AddReflectionForm
+from .forms import AddJourneyForm, AddReflectionForm, LoginForm
 
-from flask import render_template, redirect, url_for, session, request
+from flask import render_template, redirect, url_for, session, request, g, flash
 from werkzeug.utils import secure_filename
 
+from flask_login import current_user, login_user, logout_user, login_required
 
 @app.route('/')
 def index():
@@ -78,3 +79,53 @@ def add_reflection():
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('add_reflection.html', form=add_reflection_form)
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+@app.before_request
+def get_current_user():
+    g.user = current_user
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        flash('You are already logged in.')
+        return redirect(url_for('auth.home'))
+
+    form = LoginForm(request.form)
+ 
+    if request.method == 'POST' and form.validate():
+        username = request.form.get('username')
+        password = request.form.get('password')
+        
+        if password == 'student':
+            user_type = 'STUDENT'
+        elif password == 'admin':
+            user_type = 'ADMIN'
+        else:
+            flash(
+                'Invalid username or password. Please try again.',
+                'danger')
+            return render_template('login.html', form=form)
+ 
+        user = User.query.filter_by(username=username).first()
+ 
+        if not user:
+            user = User(username, password, user_type)
+            db.session.add(user)
+            db.session.commit()
+        login_user(user)
+        flash('You have successfully logged in.', 'success')
+        return redirect(url_for('index'))
+ 
+    if form.errors:
+        flash(form.errors, 'danger')
+ 
+    return render_template('login.html', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
