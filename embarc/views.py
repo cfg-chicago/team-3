@@ -17,6 +17,7 @@ from .events import socketio
 from .forms import AddJourneyForm, AddReflectionForm
 
 from flask import render_template, redirect, url_for, session, request
+from werkzeug.utils import secure_filename
 
 
 @app.route('/')
@@ -31,10 +32,16 @@ def add_journey():
     if add_journey_form.validate_on_submit():
         journey_name = add_journey_form.name.data
         journey_description = add_journey_form.description.data
-        #journey_picture = add_journey_form.picture.data
-        journey = Journey(name=journey_name, description=journey_description, picture=journey_picture)
+        journey_picture = add_journey_form.picture.data
+        filename = secure_filename(journey_picture.filename)
+        f.save(os.path.join(
+            url_for('static', filename='cdn/{}'.format(filename))
+        ))
+        journey = Journey(name=journey_name, description=journey_description, picture=filename)
         db.session.add(journey)
         db.session.commit()
+        journeys = Journey.query.all()
+        print(journeys[0])
         return redirect(url_for('index'))
     return render_template('add_journey.html', form=add_journey_form)
 
