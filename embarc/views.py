@@ -20,6 +20,7 @@ from flask import render_template, redirect, url_for, session, request
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+
     if request.method == 'POST':
         journey_name = request.form['journey_name']
         journey_description = request.form['description']
