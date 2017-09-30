@@ -23,23 +23,22 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 @app.route('/')
 def index():
-    if 'username' not in session:
-        return redirect(url_for('login'))
     journeys = Journey.query.all()
     print(journeys)
+    print(current_user)
     return render_template('index.html', journeys=journeys, user=current_user)
 
 
 @app.route('/create/')
 
 
-@app.route('/user/<user_id>/', methods=['GET', 'POST'])
-def show_user(user_id):
+@app.route('/profile/', methods=['GET', 'POST'])
+def show_user():
     context = {
         "user" : session['username'],
         "reflections" : Reflection.query.filter_by(name=session['username'])
     }
-    return render_template('user.html', **context)
+    return render_template('user.html', **context, user=current_user)
 
 
 @app.route('/journey/<journey_slug>/', methods=['GET', 'POST'])
@@ -52,13 +51,14 @@ def show_journey(journey_slug):
     }
     add_reflection_form = AddReflectionForm()
     if add_reflection_form.validate_on_submit():
-        reflection_name = add_reflection_form.name.data
+        reflection_name = session['username']
         reflection_description = add_reflection_form.description.data
-        reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug)
+        reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug,
+                                journeyname=context["journey_name"])
         db.session.add(reflection)
         db.session.commit()
-        return redirect(url_for('show_journey', journey_slug=journey_slug, user=current_user))
-    return render_template('journey.html', form=add_reflection_form, **context)
+        return redirect(url_for('show_journey', journey_slug=journey_slug))
+    return render_template('journey.html', form=add_reflection_form, user=current_user, **context)
 
 
 @app.route('/add-journey/', methods=['GET', 'POST'])
@@ -78,8 +78,7 @@ def add_journey():
         journeys = Journey.query.all()
         return redirect(url_for('index'))
 
-
-    return render_template('add_journey.html', form=add_journey_form)
+    return render_template('add_journey.html', form=add_journey_form, user=current_user)
 
 
 @login_manager.user_loader
@@ -110,7 +109,7 @@ def login():
             flash(
                 'Invalid username or password. Please try again.',
                 'danger')
-            return render_template('login.html', form=form)
+            return render_template('login.html', form=form, user=current_user)
 
         user = User.query.filter_by(username=username).first()
 
@@ -126,7 +125,8 @@ def login():
     if form.errors:
         flash(form.errors, 'danger')
 
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, user=current_user)
+
 
 @app.route('/logout/')
 def logout():
