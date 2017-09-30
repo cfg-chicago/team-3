@@ -3,11 +3,6 @@
     <div class="container">
         <h1 class="title">Embarc Journeys</h1>
     </div>
-    <section>
-        <div class="container">
-            <a class="button" href="{{url_for('login')}}">Login</a>
-        </div>
-    </section>
     {% if user.user_type == 'ADMIN' %}
     <div class="container">
         <a class="button" href="{{url_for('add_journey')}}">Add a Journey</a>
