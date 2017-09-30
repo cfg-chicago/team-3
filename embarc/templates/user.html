@@ -5,7 +5,7 @@
       </div>
   {% for reflection in reflections %}
   <div class="container container-comment">
-      <h3>{{ reflection['journeyname'] }}</h3>
+      <a href="{{ url_for('show_journey', journey_slug=reflection['journeyid']) }}"><h3>{{ reflection['journeyname'] }}</h3></a>
       <h4>{{ reflection['description']}}</h4>
       {% if reflection.picture %}
           <img src="{{ url_for('static', filename='cdn/{}'.format(reflection.picture)) }}">
