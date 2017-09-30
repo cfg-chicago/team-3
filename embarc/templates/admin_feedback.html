@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+{% for feed in feed_list %}
+  {{feed[1].journeyid}}
+  {% for entry in feed %}
+    <div>
+      rating
+      {{entry.rating}}
+      q1
+      {{entry.q1}}
+      q2
+      {{entry.q2}}
+      q3
+      {{entry.q3}}
+      q4
+      {{entry.q4}}
+      q5
+      {{entry.q5}}
+      q6
+      {{entry.q6}}
+    </div>
+  {% endfor %}
+{% endfor %}
+{% endblock %}
