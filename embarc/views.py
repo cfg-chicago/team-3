@@ -62,4 +62,6 @@ def add_journey():
         db.session.commit()
         journeys = Journey.query.all()
         return redirect(url_for('index'))
+
+    
     return render_template('add_journey.html', form=add_journey_form)
