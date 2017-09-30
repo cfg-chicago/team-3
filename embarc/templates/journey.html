@@ -15,7 +15,7 @@
       <h4>{{reflection.description}}</h4>
   </div>
   <div>
-    {{reflection.date}}
+    {{ reflection.date.strftime('%-m/%d/%Y %-I:%M %p')}}
   </div>
   {% endfor %}
   {% if user.user_type == 'ADMIN' or user.user_type == 'STUDENT' %}
