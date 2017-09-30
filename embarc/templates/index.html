@@ -10,8 +10,8 @@
     {% endif %}
     {% for journey in journeys %}
     <a href="{{ url_for('show_journey', journey_slug=journey.id) }}">
-        <div class="container container-full-width" style="background-image:url({{ url_for('static', filename='cdn/{}'.format(journey.picture)) }})">
-            <h2 class="subtitle">{{ journey.name }}</h2>
+        <div class="container container-full-width container-600-height" style="background-image:url({{ url_for('static', filename='cdn/{}'.format(journey.picture)) }})">
+            <button>{{ journey.name }}</button>
         </div>
             <!--<img width="100%" src="{{ url_for('static', filename='cdn/{}'.format(journey.picture)) }}">-->
     </a>
