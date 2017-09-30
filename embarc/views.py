@@ -72,10 +72,10 @@ def show_feedback(journey_slug):
 @app.route('/profile/<user_slug>/', methods=['GET', 'POST'])
 def show_user(user_slug):
     context = {
-        "user" : user_slug,
         "reflections" : Reflection.query.filter_by(name=user_slug)
     }
-    return render_template('user.html', **context, user=current_user)
+    full_user = User.query.filter_by(username=user_slug).first()
+    return render_template('user.html', **context, user=current_user, target_user=full_user)
 
 
 @app.route('/journey/<journey_slug>/', methods=['GET', 'POST'])
