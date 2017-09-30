@@ -110,6 +110,7 @@ def login():
 
         if not user:
             user = User(username, password, user_type)
+            session['user_type'] = user_type
             db.session.add(user)
             db.session.commit()
         login_user(user)
