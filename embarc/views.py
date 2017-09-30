@@ -160,4 +160,4 @@ def create_user():
         flash('You have successfully registered.', 'success')
         return redirect(url_for('index'))
 
-    return render_template('create_user.html', form=form)
+    return render_template('create_user.html', form=form, user=current_user)

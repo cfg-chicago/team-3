@@ -19,10 +19,10 @@ class LoginForm(Form):
 	password = PasswordField('Password', [DataRequired()])
 
 class CreateUserForm(Form):
-	username = StringField('Username', [DataRequired()])
-	first_name = StringField('First name', [DataRequired()])
-	last_name = StringField('Last name', [DataRequired()])
-	email = StringField('Email', [DataRequired()])
-	group = StringField('Group', [DataRequired()])
-	password = PasswordField('Password', [DataRequired()])
+	username = StringField('Username*', [DataRequired()])
+	first_name = StringField('First name*', [DataRequired()])
+	last_name = StringField('Last name*', [DataRequired()])
+	email = StringField('Email*', [DataRequired()])
+	group = StringField('Group*', [DataRequired()])
+	password = PasswordField('Password*', [DataRequired()])
 	teacher_access_code = PasswordField('Teacher access code')
