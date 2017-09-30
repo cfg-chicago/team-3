@@ -2,10 +2,7 @@
 {% block body %}
   <div class="container">
       <h1>Journey Feedback</h1>
-    <form
-        method="POST"
-        action="{{ url_for('show_feedback' , journey_slug=journeyid)}}"
-        role="form">
+    <form method="POST" action="{{ url_for('show_feedback' , journey_slug=journeyid)}}" role="form">
       {{ form.csrf_token }}
       <h2>{{ journeyname }}</h2>
       <fieldset>
