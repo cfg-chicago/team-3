@@ -52,7 +52,8 @@ def show_journey(journey_slug):
     if add_reflection_form.validate_on_submit():
         reflection_name = session['username']
         reflection_description = add_reflection_form.description.data
-        reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug)
+        reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug,
+                                journeyname=context["journey_name"])
         db.session.add(reflection)
         db.session.commit()
         return redirect(url_for('show_journey', journey_slug=journey_slug))
