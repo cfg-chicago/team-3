@@ -12,7 +12,7 @@ from oauth2client import tools as tools
 from oauth2client.file import Storage
 
 from .app import app, redis
-from .models import db, Journey, Reflection
+from .models import db, Journey, Reflection, User
 from .events import socketio
 from .forms import AddJourneyForm, AddReflectionForm
 
@@ -25,6 +25,24 @@ def index():
     journeys = Journey.query.all()
     print(journeys)
     return render_template('index.html', journeys=journeys)
+
+
+@app.route('/<journey_slug>')
+def show_journey():
+    context = {
+        "journey_name" : journey_slug
+        # TBD
+    }
+    return render_template('journey.html', **context)
+
+
+@app.route('/<reflection_slug>')
+def show_reflection():
+    context = {
+        "reflection_name" : reflection_slug
+        # TBD
+    }
+    return render_template('reflection.html', **context)
 
 
 @app.route('/add-journey', methods=['GET', 'POST'])
