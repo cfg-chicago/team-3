@@ -12,6 +12,7 @@ from oauth2client import tools as tools
 from oauth2client.file import Storage
 
 from .app import app, redis, db
+from .models import *
 from .events import socketio
 from .forms import MusicSubmitForm
 
