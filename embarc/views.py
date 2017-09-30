@@ -11,8 +11,8 @@ from oauth2client import client
 from oauth2client import tools as tools
 from oauth2client.file import Storage
 
-from .app import app, redis, db
-from .models import *
+from .app import app, redis
+from .models import db, Journey
 from .events import socketio
 from .forms import MusicSubmitForm
 
@@ -27,7 +27,9 @@ def index():
     journey_description = 'this is a description' # request.form['description']
     journey_picture = 'chuck'
     journey = Journey(name=journey_name, description=journey_description, picture=journey_picture)
-    # print(Journey.query.all())
+    db.session.add(journey)
+    db.session.commit()
+    print(Journey.query.all())
     return render_template('index.html')
 
 
