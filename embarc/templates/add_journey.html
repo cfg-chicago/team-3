@@ -28,9 +28,10 @@
                 {{ form.csrf_token }}
                 <input type=submit value=Submit>
             </form> -->
-            <form action="{{ url_for('add_journey') }}" method="POST">
+            <form action="{{ url_for('add_journey') }}" method="POST" enctype="multipart/form-data">
                 {{ form.csrf_token }}
                 {{ form.name(class_='input') }}
+                {{ form.picture(class_='input') }}
                 {{ form.description(class_='textarea') }}
                 <input type=submit value="Go">
             </form>
