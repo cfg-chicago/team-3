@@ -22,8 +22,9 @@ from werkzeug.utils import secure_filename
 
 @app.route('/')
 def index():
-    print(Journey.query.all())
-    return render_template('index.html')
+    journeys = Journey.query.all()
+    print(journeys)
+    return render_template('index.html', journeys=journeys)
 
 
 @app.route('/add-journey', methods=['GET', 'POST'])
