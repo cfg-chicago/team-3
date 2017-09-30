@@ -29,7 +29,6 @@ class Feedback(db.Model):
     q4 = db.Column(db.String(3000), unique=False, nullable=False)
     q5 = db.Column(db.String(3000), unique=False, nullable=False)
     q6 = db.Column(db.String(3000), unique=False, nullable=False)
-    q7 = db.Column(db.String(3000), unique=False, nullable=False)
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 class User(db.Model):
