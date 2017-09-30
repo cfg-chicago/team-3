@@ -27,6 +27,13 @@ def index():
     print(journeys)
     return render_template('index.html', journeys=journeys, user_type=current_user.user_type)
 
+@app.route('/user/<user_id>/', methods=['GET', 'POST'])
+def show_user(user_id):
+    context = {
+        "user" :
+    }
+    return render_template('user.html', **context)
+
 
 @app.route('/journey/<journey_slug>/', methods=['GET', 'POST'])
 def show_journey(journey_slug):
