@@ -4,6 +4,21 @@
         <div class="container">
             <h1 class="title">Embarc Journeys</h1>
             <p>This is where you add journey</p>
+            <form action="#" method="post">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        {{ form.name }}
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Description</label>
+                    <div class="control">
+                        {{ form.description }}
+                    </div>
+                </div>
+                {{ form.csrf_token }}
+            </form>
         </div>
     </section>
 {% endblock %}
