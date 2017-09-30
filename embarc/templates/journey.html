@@ -10,8 +10,8 @@
     {{reflection.date}}
   </div>
   {% endfor %}
+  {% if user.user_type == 'ADMIN' or user.user_type == 'STUDENT' %}
     <div class="container">
-        <h1 class="title">Embarc Journeys</h1>
         <p>This is where you add a reflection</p>
         <form action="#" method="post">
             <div class="field">
@@ -34,4 +34,5 @@
             </div>
         </form>
     </div>
+    {% endif %}
 {% endblock %}

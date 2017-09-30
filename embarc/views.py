@@ -57,8 +57,8 @@ def show_journey(journey_slug):
         reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug)
         db.session.add(reflection)
         db.session.commit()
-        return redirect(url_for('show_journey', journey_slug=journey_slug, user=current_user))
-    return render_template('journey.html', form=add_reflection_form, **context)
+        return redirect(url_for('show_journey', journey_slug=journey_slug))
+    return render_template('journey.html', form=add_reflection_form, user=current_user, **context)
 
 
 @app.route('/add-journey/', methods=['GET', 'POST'])
