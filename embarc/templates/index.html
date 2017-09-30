@@ -13,6 +13,9 @@
         <a class="button" href="{{url_for('add_journey')}}">Add a Journey</a>
     </div>
     {% endif %}
+    {% if user_type == 'STUDENT' %}
+    <p>Student</p>
+    {% endif %}
     {% for journey in journeys %}
     <div class="container">
         <h2 class="subtitle">{{ journey.name }}</h2>
