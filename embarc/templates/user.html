@@ -4,7 +4,7 @@
       <h1> {{ target_user.first_name }} {{ target_user.last_name }}'s Page </h1>
       </div>
   {% for reflection in reflections %}
-  <div class="container container-full-width container-comment">
+  <div class="container container-comment">
       <h3>{{ reflection['journeyname'] }}</h3>
       <h4>{{ reflection['description']}}</h4>
       {% if reflection.picture %}
