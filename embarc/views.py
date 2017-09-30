@@ -21,6 +21,7 @@ from werkzeug.utils import secure_filename
 
 from flask_login import current_user, login_user, logout_user, login_required
 
+
 @app.route('/')
 def index():
     journeys = Journey.query.all()
@@ -122,9 +123,11 @@ def add_journey():
 def load_user(id):
     return User.query.get(int(id))
 
+
 @app.before_request
 def get_current_user():
     g.user = current_user
+
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
