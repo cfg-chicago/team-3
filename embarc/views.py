@@ -62,3 +62,5 @@ def add_reflection():
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('add_reflection.html', form=add_reflection_form)
+
+
