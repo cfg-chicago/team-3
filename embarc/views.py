@@ -31,10 +31,10 @@ def index():
 def show_journey(journey_slug):
     context = {
         "journey_name" : journey_slug,
-        "journey_description": Journey.query.filter_by(id=journey_slug).first()
+        "journey_description": Journey.query.filter_by(id=journey_slug).first(),
         "reflections" : []
     }
-   return render_template('journey.html', **context)
+    return render_template('journey.html', **context)
 
 
 @app.route('/add-journey/', methods=['GET', 'POST'])
