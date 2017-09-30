@@ -38,7 +38,7 @@ def show_user():
         "user" : session['username'],
         "reflections" : Reflection.query.filter_by(name=session['username'])
     }
-    return render_template('user.html', **context, user=current_user)
+    return render_template('user.html', **context)
 
 
 @app.route('/journey/<journey_slug>/', methods=['GET', 'POST'])
