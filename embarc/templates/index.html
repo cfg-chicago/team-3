@@ -6,6 +6,7 @@
     {% if user.user_type == 'ADMIN' %}
     <div class="container">
         <a class="button" href="{{url_for('add_journey')}}">Add a Journey</a>
+        <a class="button" href="{{url_for('show_admin_feedback')}}">View Feedback</a>
     </div>
     {% endif %}
     {% for journey in journeys | reverse %}
