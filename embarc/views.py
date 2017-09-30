@@ -87,10 +87,7 @@ def show_journey(journey_slug):
         reflection_picture_filename = secure_filename(reflection_picture.filename)
         reflection_picture.save(os.path.join(app.root_path, 'static/cdn/{}'.format(reflection_picture_filename)))
         print('Picture: {}'.format(reflection_picture))
-        reflection_picture_filename = secure_filename(reflection_picture.filename)
-        reflection_picture.save(os.path.join(app.root_path, 'static/cdn/{}'.format(reflection_picture_filename)))
-        reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug,
-                                journeyname=context["journey_name"], picture=reflection_picture_filename)
+        reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug, journeyname=context["journey_name"], picture=reflection_picture_filename)
         db.session.add(reflection)
         db.session.commit()
         return redirect(url_for('show_journey', journey_slug=journey_slug))
