@@ -29,6 +29,10 @@ def index():
     print(journeys)
     return render_template('index.html', journeys=journeys) #, user_type=current_user.user_type)
 
+
+@app.route('/')
+
+
 @app.route('/user/<user_id>/', methods=['GET', 'POST'])
 def show_user(user_id):
     context = {
@@ -112,6 +116,7 @@ def login():
 
         if not user:
             user = User(username, password, user_type)
+            session['username'] = username
             db.session.add(user)
             db.session.commit()
         login_user(user)
