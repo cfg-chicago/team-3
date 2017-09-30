@@ -41,10 +41,7 @@ class User(db.Model):
     group = db.Column(db.String(120), unique=False, nullable=False)
     password = db.Column(db.String(120), unique=False, nullable=False)
     user_type = db.Column(db.String(10), unique=False, nullable=False)
-
-    # fb_login = db.Column(db.String(120), unique=False, nullable=False)
-    # picture = db.Column(db.String(250), unique=False, nullable=True)
-
+    
     def __init__(self, username, first_name, last_name, email,
                 group, password, user_type):
         self.username = username
