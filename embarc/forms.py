@@ -13,7 +13,6 @@ class AddJourneyForm(Form):
 
 class AddReflectionForm(Form):
     name = StringField('name', validators=[DataRequired()])
-    journey = StringField('journey', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])
 
 class LoginForm(Form):
