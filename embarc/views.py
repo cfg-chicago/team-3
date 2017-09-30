@@ -50,8 +50,8 @@ def show_admin_feedback():
 @app.route('/journey/<journey_slug>/feedback/', methods=['GET', 'POST'])
 def show_feedback(journey_slug):
     context = {
-        "journeyid" : journey_slug
-        # "journeyname": Journey.query.filter_by(id=journey_slug).first().name
+        "journeyid" : journey_slug,
+        "journeyname": Journey.query.filter_by(id=journey_slug).first().name
     }
     add_feedback_form = AddFeedbackForm()
     if add_feedback_form.validate_on_submit():

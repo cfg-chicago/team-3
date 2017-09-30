@@ -22,6 +22,7 @@ class Reflection(db.Model):
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
+    journeyname = db.Column(db.Integer, unique=False, nullable=False)
     journeyid = db.Column(db.Integer, unique=False, nullable=False)
     rating = db.Column(db.Integer, unique=False, nullable=False)
     q1 = db.Column(db.String(3000), unique=False, nullable=False)
