@@ -1,8 +1,14 @@
 {% extends "layout.html" %}
 {% block body %}
-    <section class="section">
+    <section class="hero is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">Embarc Journeys</h1>
+            </div>
+        </div>
+    </section>
+    <section>
         <div class="container">
-            <h1 class="title">Embarc Journeys</h1>
             <a class="button" href="{{url_for('add_journey')}}">Add a Journey</a>
         </div>
     </section>
