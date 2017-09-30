@@ -30,7 +30,7 @@ def index():
     return render_template('index.html', journeys=journeys) #, user_type=current_user.user_type)
 
 
-@app.route('/')
+@app.route('/create/')
 
 
 @app.route('/user/<user_id>/', methods=['GET', 'POST'])
@@ -90,7 +90,7 @@ def load_user(id):
 def get_current_user():
     g.user = current_user
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         flash('You are already logged in.')
@@ -128,7 +128,7 @@ def login():
 
     return render_template('login.html', form=form)
 
-@app.route('/logout')
+@app.route('/logout/')
 def logout():
     logout_user()
     return redirect(url_for('index'))
