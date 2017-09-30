@@ -31,9 +31,6 @@ def index():
 def show_admin_feedback():
     feedback = Feedback.query.all()
     max_journey = Journey.query.all()[-1].id
-    # context = {
-    #     'feed_list' : feedback
-    # }
     context = {}
     context['list_by_journey_id'] = []
     i = 1
@@ -119,7 +116,6 @@ def add_journey():
         journey = Journey(name=journey_name, description=journey_description, picture=journey_picture_filename)
         db.session.add(journey)
         db.session.commit()
-        # journeys = Journey.query.all()
         return redirect(url_for('index'))
 
     return render_template('add_journey.html', form=add_journey_form, user=current_user)

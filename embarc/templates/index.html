@@ -14,9 +14,6 @@
         <div class="container container-full-width container-600-height" style="background-image:url({{ url_for('static', filename='cdn/{}'.format(journey.picture)) }})">
             <button>{{ journey.name }}</button>
         </div>
-            <!--<img width="100%" src="{{ url_for('static', filename='cdn/{}'.format(journey.picture)) }}">-->
     </a>
     {% endfor %}
 {% endblock %}
-
-<!-- End ind -->
