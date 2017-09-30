@@ -144,6 +144,7 @@ def login():
 def logout():
     logout_user()
     session.clear()
+    flash('You have successfully logged out.', 'success')
     return redirect(url_for('index'))
 
 @app.route('/create_user/', methods=['GET', 'POST'])
