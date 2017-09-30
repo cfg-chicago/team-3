@@ -32,20 +32,10 @@ def index():
 def show_journey(journey_slug):
     context = {
         "journey_name" : journey_slug,
-        "journey_description": Journey.query.filter_by(id=journey_slug).first()
+        "journey_description": Journey.query.filter_by(id=journey_slug).first(),
+        "reflections" : []
     }
-    return journey_description
-   # return render_template('journey.html', **context)
-
-
-@app.route('/reflection/<reflection_slug>/')
-def show_reflection(reflection_slug):
-    context = {
-        "reflection_name" : reflection_slug
-        # TBD
-    }
-    return "null"
-    # return render_template('reflection.html', **context)
+    return render_template('journey.html', **context)
 
 
 @app.route('/add-journey/', methods=['GET', 'POST'])
