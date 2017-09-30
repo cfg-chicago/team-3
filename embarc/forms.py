@@ -1,6 +1,6 @@
 from flask_wtf import Form
 from flask_wtf.file import FileField, FileRequired
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, IntegerField
 from wtforms.widgets import TextArea
 from wtforms.validators import DataRequired
 
@@ -13,6 +13,16 @@ class AddJourneyForm(Form):
 
 class AddReflectionForm(Form):
     description = StringField('description', validators=[DataRequired()])
+
+class AddFeedbackForm(Form):
+    rating = IntegerField('rating', validators=[DataRequired()])
+    q1 = StringField('q1', validators=[DataRequired()])
+    q2 = StringField('q2', validators=[DataRequired()])
+    q3 = StringField('q3', validators=[DataRequired()])
+    q4 = StringField('q4', validators=[DataRequired()])
+    q5 = StringField('q5', validators=[DataRequired()])
+    q6 = StringField('q6', validators=[DataRequired()])
+    q7 = StringField('q7', validators=[DataRequired()])
 
 class LoginForm(Form):
 	username = StringField('Username', [DataRequired()])
