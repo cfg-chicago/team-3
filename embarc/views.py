@@ -70,10 +70,19 @@ def show_journey(journey_slug):
     }
     add_reflection_form = AddReflectionForm()
     if add_reflection_form.validate_on_submit():
-        reflection_name = session['username']
+        reflection_name = current_user.username
         reflection_description = add_reflection_form.description.data
+        reflection_picture = add_reflection_form.picture.data
+        print(add_reflection_form.__dict__)
+        print('Picture: {}'.format(reflection_picture))
+        if reflection_picture:
+            print("REFLECTION PICCCCCCCCCCCCCCCCCCCCCCCCCCTURE")
+            reflection_picture_filename = secure_filename(reflection_picture.filename)
+            reflection_picture.save(os.path.join(app.root_path, 'static/cdn/{}'.format(reflection_picture_filename)))
+        else:
+            reflection_picture_filename = None
         reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug,
-                                journeyname=context["journey_name"])
+                                journeyname=context["journey_name"], picture=reflection_picture_filename)
         db.session.add(reflection)
         db.session.commit()
         return redirect(url_for('show_journey', journey_slug=journey_slug))

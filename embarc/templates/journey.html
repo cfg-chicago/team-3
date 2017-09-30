@@ -14,6 +14,10 @@
       <button>{{reflection.name}}</button>
               <h4>{{reflection.description}}</h4>
           <h6>{{ reflection.date.strftime('%-m/%d/%Y %-I:%M %p')}}</h6>
+          {% if reflection.picture %}
+          <p>THIS IS AN IMAGE</p>
+          <img src="{{ url_for('static', filename='cdn/{}'.format(reflection.picture)) }}">
+          {% endif %}
   </div>
   {% endfor %}
   {% if user.user_type == 'ADMIN' or user.user_type == 'STUDENT' %}
