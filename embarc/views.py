@@ -49,7 +49,6 @@ def show_reflection():
 def add_journey():
     add_journey_form = AddJourneyForm()
     if add_journey_form.validate_on_submit():
-        return redirect(url_for('index'))
         journey_name = add_journey_form.name.data
         journey_description = add_journey_form.description.data
         #journey_picture = add_journey_form.picture.data
