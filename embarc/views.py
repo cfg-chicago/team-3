@@ -23,8 +23,6 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 @app.route('/')
 def index():
-    if 'username' not in session:
-        return redirect(url_for('login'))
     journeys = Journey.query.all()
     print(journeys)
     return render_template('index.html', journeys=journeys, user=current_user)
