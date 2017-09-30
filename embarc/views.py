@@ -69,13 +69,13 @@ def show_feedback(journey_slug):
     return render_template('feedback.html', form=add_feedback_form, user=current_user, **context)
 
 
-@app.route('/profile/', methods=['GET', 'POST'])
-def show_user():
+@app.route('/profile/<user_slug>/', methods=['GET', 'POST'])
+def show_user(user_slug):
     context = {
-        "user" : session['username'],
-        "reflections" : Reflection.query.filter_by(name=current_user.username)
+        "user" : user_slug,
+        "reflections" : Reflection.query.filter_by(name=user_slug)
     }
-    return render_template('user.html', **context)
+    return render_template('user.html', **context, user=current_user)
 
 
 @app.route('/journey/<journey_slug>/', methods=['GET', 'POST'])
@@ -92,10 +92,16 @@ def show_journey(journey_slug):
         reflection_name = current_user.username
         reflection_description = add_reflection_form.description.data
         reflection_picture = add_reflection_form.picture.data
-        reflection_picture_filename = secure_filename(reflection_picture.filename)
-        reflection_picture.save(os.path.join(app.root_path, 'static/cdn/{}'.format(reflection_picture_filename)))
-        print('Picture: {}'.format(reflection_picture))
-        reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug, journeyname=context["journey_name"], picture=reflection_picture_filename)
+        if reflection_picture:
+            reflection_picture_filename = secure_filename(reflection_picture.filename)
+            reflection_picture.save(os.path.join(app.root_path, 'static/cdn/{}'.format(reflection_picture_filename)))
+            reflection_picture_filename = secure_filename(reflection_picture.filename)
+            reflection_picture.save(os.path.join(app.root_path, 'static/cdn/{}'.format(reflection_picture_filename)))
+            reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug,
+                                journeyname=context["journey_name"], picture=reflection_picture_filename)
+        else :
+            reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug,
+                                journeyname=context["journey_name"])
         db.session.add(reflection)
         db.session.commit()
         return redirect(url_for('show_journey', journey_slug=journey_slug))

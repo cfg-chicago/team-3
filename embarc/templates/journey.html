@@ -11,7 +11,7 @@
   </div>
   {% for reflection in reflections %}
   <div class="container container-full-width container-comment">
-      <button>{{reflection.name}}</button>
+      <a href="{{ url_for('show_user', user_slug=reflection.name)}}"><button>{{reflection.name}}</button></a>
               <h4>{{reflection.description}}</h4>
           <h6>{{ reflection.date.strftime('%-m/%d/%Y %-I:%M %p')}}</h6>
           {% if reflection.picture %}
