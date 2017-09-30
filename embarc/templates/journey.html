@@ -1,11 +1,19 @@
 {% extends "layout.html" %}
 {% block body %}
-  {{ journey_name }}
-  <img src="{{ url_for('static', filename='cdn/{}'.format(journey_img_name)) }}">
-  {{ journey_description }}
+  <div>
+    {{ journey_name }}
+  </div>
+  <div>
+    <img src="{{ url_for('static', filename='cdn/{}'.format(journey_img_name)) }}">
+  </div>
+  <div>
+    {{ journey_description }}
+  </div>
   {% for reflection in reflections %}
   <div>
     {{reflection.description}}
+  </div>
+  <div>
     {{reflection.date}}
   </div>
   {% endfor %}
