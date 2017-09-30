@@ -1,15 +1,17 @@
 {% extends 'layout.html' %}
  
 {% block body %}
-  <div class="top-pad">
+  <div class="container">
     <form
         method="POST"
         action="{{ url_for('login') }}"
         role="form">
       {{ form.csrf_token }}
-      <div class="form-group">{{ form.username.label }}: {{ form.username() }}</div>
-      <div class="form-group">{{ form.password.label }}: {{ form.password() }}</div>
-      <button type="submit" class="btn btn-default">Submit</button>
+      <div class="form-group">{{ form.username.label }} {{ form.username() }}</div>
+      <div class="form-group">{{ form.password.label }} {{ form.password() }}</div>
+      <button type="submit">Submit</button>
     </form>
+    <h3>No account?</h3>
+    <a class="button" href="{{ url_for('create_user') }}">Create Account</a>
   </div>
 {% endblock %}
