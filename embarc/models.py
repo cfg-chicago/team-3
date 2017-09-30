@@ -26,14 +26,6 @@ class User(db.Model):
     def __init__(self, username, password):
         self.username = username
  
-    @staticmethod
-    def try_login(username, password):
-        conn = get_ldap_connection()
-        conn.simple_bind_s(
-            'cn=%s,ou=Users,dc=testathon,dc=net' % username,
-            password
-        )
- 
     def is_authenticated(self):
         return True
  
