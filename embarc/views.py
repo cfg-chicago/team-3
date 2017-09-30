@@ -12,7 +12,7 @@ from oauth2client import tools as tools
 from oauth2client.file import Storage
 
 from .app import app, redis
-from .models import db, Journey, Reflection, login_manager, User
+from .models import db, Journey, Reflection, login_manager, User, Feedback
 from .events import socketio
 from .forms import AddJourneyForm, AddReflectionForm, LoginForm, CreateUserForm, AddFeedbackForm
 
@@ -41,8 +41,8 @@ def show_feedback(journey_slug):
         q4 = add_feedback_form.q4.data
         q5 = add_feedback_form.q5.data
         q6 = add_feedback_form.q6.data
-        q7 = add_feedback_form.q7.data
-        feedback = Feedback(name=session['username'], journey_id=journey_slug, rating=rating, q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6, q7=q7)
+        feedback = Feedback(name=session['username'], journey_id=journey_slug, rating=rating, q1=q1, q2=q2, q3=q3, q4=q4, q5=q5, q6=q6)
+        print(Feedback.query.all())
     return render_template('feedback.html', form=add_feedback_form, user=current_user, **context)
 
 
@@ -130,14 +130,14 @@ def login():
                 'danger')
             return render_template('login.html', form=form, user=current_user)
 
-        
+
         session['username'] = username
 
         login_user(user)
 
         flash('You have successfully logged in.', 'success')
         return redirect(url_for('index'))
-        
+
     return render_template('login.html', form=form, user=current_user)
 
 
