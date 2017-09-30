@@ -15,6 +15,7 @@ class Reflection(db.Model):
     name = db.Column(db.String(120), unique=False, nullable=False)
     description = db.Column(db.String(3000), unique=False, nullable=False)
     journeyid = db.Column(db.Integer, unique=False, nullable=False)
+    journeyname = db.Column(db.Integer, unique=False, nullable=False)
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 class User(db.Model):
