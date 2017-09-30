@@ -13,7 +13,7 @@ from oauth2client.file import Storage
 
 from .app import app, redis
 from .events import socketio
-from .forms import MusicSubmitForm
+from .forms import AddJourneyForm
 
 from flask import render_template, redirect, url_for
 
@@ -24,4 +24,5 @@ def index():
 
 @app.route('/add-journey')
 def add_journey():
-    return render_template('add_journey.html')
+    add_journey_form = AddJourneyForm()
+    return render_template('add_journey.html', form=add_journey_form)
