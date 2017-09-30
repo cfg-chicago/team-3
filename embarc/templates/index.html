@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-    <section class="hero is-primary is-bold">
+    <section class="hero is-primary">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">Embarc Journeys</h1>
@@ -11,11 +11,21 @@
         <div class="container">
             <a class="button" href="{{url_for('add_journey')}}">Add a Journey</a>
         </div>
-        <div class="container">
-            {% for journey in journeys %}
-                <p>{{ journey.name }}</p>
-                <img src="{{ url_for('static', filename='cdn/{}'.format(journey.picture)) }}">
-            {% endfor %}
+    </section>
+        {% for journey in journeys %}
+        <div class="hero is-primary">
+            <div class="hero-body">
+                <div class="container">
+                    <h2 class="subtitle">{{ journey.name }}</h2>
+                </div>
+            </div>
+        </div>
+        <img src="{{ url_for('static', filename='cdn/{}'.format(journey.picture)) }}">
+        {% endfor %}
+
+
+    <section>
+
         <div class="container">
             <a class="button" href="{{url_for('add_reflection')}}">Add a Reflection</a>
         </div>
