@@ -13,7 +13,7 @@ class AddJourneyForm(Form):
 
 class AddReflectionForm(Form):
     description = StringField('My Reflection')
-    picture = FileField('Picture')
+    picture = FileField('Picture', validators=[FileRequired()])
 
 class AddFeedbackForm(Form):
     rating = IntegerField('rating')#, validators=[DataRequired()])
