@@ -11,7 +11,7 @@ from oauth2client import client
 from oauth2client import tools as tools
 from oauth2client.file import Storage
 
-from .app import app, redis
+from .app import app, redis, db
 from .events import socketio
 from .forms import MusicSubmitForm
 
@@ -22,8 +22,8 @@ from flask import render_template, redirect, url_for, session, request
 def index():
 
     if request.method == 'POST':
-        journey_name = request.form['journey_name']
-        journey_description = request.form['description']
+        journey_name = 'name'# request.form['journey_name']
+        journey_description = 'this is a description' # request.form['description']
         journey_picture = 'chuck'
         journey = Journey(name=journey_name, description=journey_description, picture=journey_picture)
         print(Journey.query.all())
