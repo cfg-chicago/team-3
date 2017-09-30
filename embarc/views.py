@@ -23,7 +23,7 @@ def index():
     if request.method == 'POST':
         journey_name = request.form['journey_name']
         journey_description = request.form['description']
-        journey = Journey(name=journey_name, description=)
+        journey = Journey(name=journey_name, description=journey_description)
     return render_template('index.html')
 
 @app.route('/add-journey')
