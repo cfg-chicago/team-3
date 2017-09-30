@@ -28,4 +28,5 @@ def index():
         journey_description = request.form['description']
         journey_picture = 'chuck'
         journey = Journey(name=journey_name, description=journey_description, picture=journey_picture)
+        print(Journey.query.all())
     return render_template('index.html')

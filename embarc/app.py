@@ -8,6 +8,8 @@ app.config.from_pyfile('config.py')
 
 socketio = SocketIO(app)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 redis = redis.StrictRedis(host='localhost', port=6379, db=0)
