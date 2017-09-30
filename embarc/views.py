@@ -25,6 +25,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 def index():
     journeys = Journey.query.all()
     print(journeys)
+    print(current_user)
     return render_template('index.html', journeys=journeys, user=current_user)
 
 
@@ -37,7 +38,7 @@ def show_user(user_id):
         "user" : session['username'],
         "reflections" : Reflection.query.filter_by(name=session['username'])
     }
-    return render_template('user.html', **context)
+    return render_template('user.html', **context, user=current_user)
 
 
 @app.route('/journey/<journey_slug>/', methods=['GET', 'POST'])
@@ -78,7 +79,7 @@ def add_journey():
         return redirect(url_for('index'))
 
 
-    return render_template('add_journey.html', form=add_journey_form)
+    return render_template('add_journey.html', form=add_journey_form, user=current_user)
 
 
 @login_manager.user_loader
@@ -109,7 +110,7 @@ def login():
             flash(
                 'Invalid username or password. Please try again.',
                 'danger')
-            return render_template('login.html', form=form)
+            return render_template('login.html', form=form, user=current_user)
 
         user = User.query.filter_by(username=username).first()
 
@@ -125,7 +126,7 @@ def login():
     if form.errors:
         flash(form.errors, 'danger')
 
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, user=current_user)
 
 @app.route('/logout/')
 def logout():
