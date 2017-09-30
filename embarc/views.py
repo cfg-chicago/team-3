@@ -43,7 +43,7 @@ def show_journey(journey_slug):
         reflection = Reflection(name=reflection_name, description=reflection_description, journeyid=journey_slug)
         db.session.add(reflection)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('show_journey', journey_slug=journey_slug))
     return render_template('journey.html', form=add_reflection_form, **context)
 
 
@@ -64,21 +64,9 @@ def add_journey():
         journeys = Journey.query.all()
         return redirect(url_for('index'))
 
-    
+
     return render_template('add_journey.html', form=add_journey_form)
 
-@app.route('/add-reflection/', methods=['GET', 'POST'])
-def add_reflection():
-    add_reflection_form = AddReflectionForm()
-    if add_reflection_form.validate_on_submit():
-        reflection_name = add_reflection_form.name.data
-        reflection_description = add_reflection_form.description.data
-        reflection_journey = add_reflection_form.journey.data
-        reflection = Reflection(name=reflection_name, description=reflection_description, journey=reflection_journey)
-        db.session.add(reflection)
-        db.session.commit()
-        return redirect(url_for('index'))
-    return render_template('add_reflection.html', form=add_reflection_form)
 
 @login_manager.user_loader
 def load_user(id):
@@ -95,11 +83,11 @@ def login():
         return redirect(url_for('index'))
 
     form = LoginForm(request.form)
- 
+
     if request.method == 'POST' and form.validate():
         username = request.form.get('username')
         password = request.form.get('password')
-        
+
         if password == 'student':
             user_type = 'STUDENT'
         elif password == 'admin':
@@ -109,9 +97,9 @@ def login():
                 'Invalid username or password. Please try again.',
                 'danger')
             return render_template('login.html', form=form)
- 
+
         user = User.query.filter_by(username=username).first()
- 
+
         if not user:
             user = User(username, password, user_type)
             db.session.add(user)
@@ -119,10 +107,10 @@ def login():
         login_user(user)
         flash('You have successfully logged in.', 'success')
         return redirect(url_for('index'))
- 
+
     if form.errors:
         flash(form.errors, 'danger')
- 
+
     return render_template('login.html', form=form)
 
 @app.route('/logout')
