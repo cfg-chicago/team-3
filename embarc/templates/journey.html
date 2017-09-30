@@ -10,7 +10,7 @@
       </h4>
   </div>
   {% for reflection in reflections %}
-  <div class="container container-full-width container-comment" style="background-color: white; vertical-align: middle">
+  <div class="container container-full-width container-comment">
       <button>{{reflection.name}}</button>
               <h4>{{reflection.description}}</h4>
           <h6>{{ reflection.date.strftime('%-m/%d/%Y %-I:%M %p')}}</h6>
@@ -20,18 +20,10 @@
     <div class="container">
         <h2>Add a reflection</h2>
         <form action="#" method="post">
-            <div class="field">
-                <label class="label">Content</label>
-                <div class="control">
-                    {{ form.description(class_='textarea') }}
-                </div>
-            </div>
-            <div class="field">
-                {{ form.csrf_token }}
-                <div class="control">
-                    <button class="button is-primary">Submit</button>
-                </div>
-            </div>
+            {{ form.csrf_token }}
+            {{ form.description.label }} {{ form.description(class_='textarea') }}
+            {{ form.picture.label }} {{ form.picture }}
+            <button class="button is-primary">Submit</button>
         </form>
     </div>
     <div class="container">

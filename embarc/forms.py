@@ -12,7 +12,8 @@ class AddJourneyForm(Form):
 
 
 class AddReflectionForm(Form):
-    description = StringField('description', validators=[DataRequired()])
+    description = StringField('My Reflection')
+    picture = FileField('Picture')
 
 class AddFeedbackForm(Form):
     rating = IntegerField('rating')#, validators=[DataRequired()])

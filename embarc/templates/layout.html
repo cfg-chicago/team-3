@@ -19,7 +19,7 @@
                     </a>
                     <ul class="float-right">
                         {% if user.is_authenticated %}
-                            <a href="{{url_for('show_user')}}">Profile</a>
+                            <a class="button" href="{{url_for('show_user')}}">Profile</a>
                             <a class="button" href="{{url_for('logout')}}">Logout</a>
                         {% else %}
                             <a class="button" href="{{url_for('login')}}">Login</a>
