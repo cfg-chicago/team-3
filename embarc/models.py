@@ -14,7 +14,7 @@ class Reflection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=False, nullable=False)
     description = db.Column(db.String(3000), unique=False, nullable=False)
-    journey = db.Column(db.String(200), unique=False, nullable=False)
+    journeyid = db.Column(db.Integer, unique=False, nullable=False)
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 class User(db.Model):
@@ -39,4 +39,3 @@ class User(db.Model):
  
     def get_id(self):
         return str(self.id)
-
