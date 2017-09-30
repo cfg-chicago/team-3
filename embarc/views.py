@@ -21,8 +21,9 @@ from flask import render_template, redirect, url_for, session, request
 
 @app.route('/')
 def index():
-    print(Journey.query.all())
-    return render_template('index.html')
+    journeys = Journey.query.all()
+    print(journeys)
+    return render_template('index.html', journeys=journeys)
 
 
 @app.route('/add-journey', methods=['GET', 'POST'])
